@@ -11,9 +11,31 @@ const SignUp = () => {
   const [uploaded, setUploaded] = useState(false);
   const navigate = useNavigate();
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+
   const handleImageUpload = (e) => {
     setLoader(true);
     const image = e.target.files[0];
+
+    if (!image) {
+      setLoader(false);
+      Toast.fire({
+        icon: "error",
+        title: "No image selected!",
+      });
+      return;
+    }
+
     const apiKey = import.meta.env.VITE_imgBBKey;
     const formData = new FormData();
     formData.append("key", apiKey);
@@ -25,9 +47,29 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setPhotoURL(data.data.url);
+        if (data.success) {
+          setPhotoURL(data.data.url);
+          setUploaded(true);
+          Toast.fire({
+            icon: "success",
+            title: "Image uploaded successfully!",
+          });
+        } else {
+          console.error("Upload failed:", data);
+          Toast.fire({
+            icon: "error",
+            title: "Upload failed. Try again!",
+          });
+        }
         setLoader(false);
-        setUploaded(true);
+      })
+      .catch((error) => {
+        console.error("Error uploading image:", error);
+        Toast.fire({
+          icon: "error",
+          title: "Something went wrong during upload.",
+        });
+        setLoader(false);
       });
   };
 

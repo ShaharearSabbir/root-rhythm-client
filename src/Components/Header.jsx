@@ -53,7 +53,7 @@ const Header = () => {
         <NavLink to={`/addPlant`}>Add Plants</NavLink>
       </li>
       <li className="text-lg font-semibold">
-        <NavLink to={`/`}>My Plants</NavLink>
+        <NavLink to={`/myPlants`}>My Plants</NavLink>
       </li>
       <li className="text-lg font-semibold">
         <NavLink to={`/error`}>Error</NavLink>
@@ -107,7 +107,7 @@ const Header = () => {
               <img className="w-10" src={user.photoURL} alt="" />
               <button
                 onClick={handleSignOut}
-                className="btn btn-secondary dark:text-accent-content"
+                className="btn btn-secondary text-accent-content"
               >
                 Sign Out
               </button>

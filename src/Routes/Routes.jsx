@@ -9,6 +9,9 @@ import Loader from "../Components/Loader";
 import PrivateRoutes from "./PrivateRoutes";
 import AllPlants from "../Pages/AllPlants";
 import PlantDetails from "../Pages/PlantDetails";
+import Error from "../Pages/Error";
+import MyPlants from "../Pages/MyPlants";
+import UpdatePlant from "../Pages/UpdatePlant";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +47,24 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      {
+        path: "/updatePlant/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/plant/${params.id}`),
+        element: (
+          <PrivateRoutes>
+            <UpdatePlant></UpdatePlant>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/myPlants",
+        element: (
+          <PrivateRoutes>
+            <MyPlants></MyPlants>
+          </PrivateRoutes>
+        ),
+      },
     ],
   },
   {
@@ -53,5 +74,9 @@ export const router = createBrowserRouter([
       { path: "signup", Component: SignUp },
       { path: "signin", Component: SignIn },
     ],
+  },
+  {
+    path: "*",
+    Component: Error,
   },
 ]);
