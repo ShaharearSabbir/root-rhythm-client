@@ -5,18 +5,28 @@ import AuthLayout from "../Layouts/AuthLayout";
 import SignUp from "../Pages/SignUp";
 import SignIn from "../Pages/SignIn";
 import AddPlant from "../Pages/AddPlant";
+import Loader from "../Components/Loader";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: HomeLayout,
+    hydrateFallbackElement: <Loader></Loader>,
     children: [
       {
         index: true,
         path: "/",
         Component: Home,
       },
-      { path: "/addPlant", element: <AddPlant></AddPlant> },
+      {
+        path: "/addPlant",
+        element: (
+          <PrivateRoutes>
+            <AddPlant></AddPlant>
+          </PrivateRoutes>
+        ),
+      },
     ],
   },
   {

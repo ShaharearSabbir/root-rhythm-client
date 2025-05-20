@@ -50,6 +50,22 @@ const AddPlant = () => {
               <option value="succulent">Succulent</option>
               <option value="fern">Fern</option>
               <option value="flowering">Flowering</option>
+              <option value="cactus">Cactus</option>
+              <option value="herb">Herb</option>
+              <option value="tree">Tree</option>
+              <option value="shrub">Shrub</option>
+              <option value="vine">Vine</option>
+              <option value="grass">Grass</option>
+              <option value="aquatic">Aquatic</option>
+              <option value="orchid">Orchid</option>
+              <option value="palm">Palm</option>
+              <option value="bamboo">Bamboo</option>
+              <option value="aloe">Aloe</option>
+              <option value="bulb">Bulb</option>
+              <option value="tropical">Tropical</option>
+              <option value="air-plant">Air Plant (Tillandsia)</option>
+              <option value="bonsai">Bonsai</option>
+              <option value="carnivorous">Carnivorous</option>
             </select>
 
             {/* Description */}

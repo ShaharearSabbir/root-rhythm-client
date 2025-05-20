@@ -2,9 +2,13 @@ import React, { useContext } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
+import { useLocation, useNavigate } from "react-router";
 
 const SignIn = () => {
   const { signInUser, googleSignIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -26,12 +30,13 @@ const SignIn = () => {
         icon: "success",
         title: "Signed in successfully",
       });
+      navigate(location.state || "/");
     });
   };
 
   const handleGoogleSignIn = () => {
-    googleSignIn().then((userInfo) => {
-      console.log(userInfo);
+    googleSignIn().then(() => {
+      navigate(location.state || "/");
     });
   };
 

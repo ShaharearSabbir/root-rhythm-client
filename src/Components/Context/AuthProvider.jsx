@@ -12,6 +12,7 @@ import {
 import { app } from "../../firebase/firebase-config";
 
 const AuthProvider = ({ children }) => {
+  const [loader, setLoader] = useState(true);
   const [user, setUser] = useState(null);
 
   const auth = getAuth(app);
@@ -35,19 +36,28 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubs = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser.providerData[0]?.providerId === "password") {
-        try {
+      if (!currentUser) {
+        setUser(null);
+        setLoader(false);
+        return;
+      }
+
+      try {
+        if (currentUser.providerData[0]?.providerId === "password") {
           const res = await fetch(
             `http://localhost:5000/user/${currentUser.uid}`
           );
           const data = await res.json();
           const userData = { ...currentUser, ...data };
           setUser(userData);
-        } catch {
+        } else {
           setUser(currentUser);
         }
-      } else {
+      } catch (error) {
+        console.error("Failed to fetch user data", error);
         setUser(currentUser);
+      } finally {
+        setLoader(false);
       }
 
       console.log(currentUser);
@@ -64,6 +74,7 @@ const AuthProvider = ({ children }) => {
     signInUser,
     googleSignIn,
     setUser,
+    loader,
   };
 
   return (

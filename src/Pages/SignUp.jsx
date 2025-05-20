@@ -2,12 +2,14 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router";
 
 const SignUp = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
   const [photoURL, setPhotoURL] = useState(null);
   const [loader, setLoader] = useState(false);
   const [uploaded, setUploaded] = useState(false);
+  const navigate = useNavigate();
 
   const handleImageUpload = (e) => {
     setLoader(true);
@@ -69,14 +71,15 @@ const SignUp = () => {
               icon: "success",
               title: "Successfully Created Account",
             });
+            navigate("/");
           }
         });
     });
   };
 
   const handleGoogleSignIn = () => {
-    googleSignIn().then((userInfo) => {
-      console.log(userInfo);
+    googleSignIn().then(() => {
+      navigate("/");
     });
   };
 
