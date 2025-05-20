@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
+import Swal from "sweetalert2";
 
 const AddPlant = () => {
   const { user } = useContext(AuthContext);
@@ -27,12 +28,51 @@ const AddPlant = () => {
       });
   };
 
+  const handleAddPlant = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const plantData = Object.fromEntries(formData.entries());
+    delete plantData.image;
+    plantData.photoURL = photoURL;
+    plantData.uid = user.uid;
+    console.log(plantData);
+    fetch("http://localhost:5000/plant", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(plantData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Plant Added Successfully",
+          });
+        }
+        form.reset();
+      });
+  };
+
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl mt-30 mb-10">
+    <div className="hero min-h-screen">
+      <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Add New Plant</h1>
-          <form className="fieldset">
+          <form onSubmit={handleAddPlant} className="fieldset">
             {/* Plant Name */}
             <label className="label">Plant Name</label>
             <input

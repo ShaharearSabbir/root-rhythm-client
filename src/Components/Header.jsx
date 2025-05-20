@@ -43,19 +43,19 @@ const Header = () => {
 
   const links = (
     <>
-      <li className="text-xl font-semibold">
+      <li className="text-lg font-semibold">
         <NavLink to={`/`}>Home</NavLink>
       </li>
-      <li className="text-xl font-semibold">
-        <NavLink to={`/`}>All Plants</NavLink>
+      <li className="text-lg font-semibold">
+        <NavLink to={`/allPlants`}>All Plants</NavLink>
       </li>
-      <li className="text-xl font-semibold">
+      <li className="text-lg font-semibold">
         <NavLink to={`/addPlant`}>Add Plants</NavLink>
       </li>
-      <li className="text-xl font-semibold">
+      <li className="text-lg font-semibold">
         <NavLink to={`/`}>My Plants</NavLink>
       </li>
-      <li className="text-xl font-semibold">
+      <li className="text-lg font-semibold">
         <NavLink to={`/error`}>Error</NavLink>
       </li>
     </>

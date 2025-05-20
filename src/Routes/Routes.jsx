@@ -7,6 +7,8 @@ import SignIn from "../Pages/SignIn";
 import AddPlant from "../Pages/AddPlant";
 import Loader from "../Components/Loader";
 import PrivateRoutes from "./PrivateRoutes";
+import AllPlants from "../Pages/AllPlants";
+import PlantDetails from "../Pages/PlantDetails";
 
 export const router = createBrowserRouter([
   {
@@ -20,10 +22,25 @@ export const router = createBrowserRouter([
         Component: Home,
       },
       {
+        path: "/allPlants",
+        loader: () => fetch("http://localhost:5000/plants"),
+        Component: AllPlants,
+      },
+      {
         path: "/addPlant",
         element: (
           <PrivateRoutes>
             <AddPlant></AddPlant>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/plantDEtails/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/plant/${params.id}`),
+        element: (
+          <PrivateRoutes>
+            <PlantDetails></PlantDetails>
           </PrivateRoutes>
         ),
       },
