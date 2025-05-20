@@ -117,7 +117,9 @@ const Header = () => {
               >
                 Sign Up
               </Link>
-              <button className="btn btn-primary">Sign In</button>
+              <Link to={`/auth/signin`} className="btn btn-primary">
+                Sign In
+              </Link>
             </div>
           )}
         </div>
