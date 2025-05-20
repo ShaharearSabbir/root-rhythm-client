@@ -4,10 +4,30 @@ import { RiSunFoggyLine } from "react-icons/ri";
 import { FaCloudMoon } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "./Context/AuthContext";
+import Swal from "sweetalert2";
 
 const Header = () => {
-  const { name } = useContext(AuthContext);
-  console.log(name);
+  const { user, signOutUser } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    signOutUser().then(() => {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "warning",
+        title: "Signed out successfully",
+      });
+    });
+  };
 
   const [theme, setTheme] = useState(
     document.documentElement.getAttribute("data-theme")
@@ -80,10 +100,27 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end flex gap-5">
-        <Link to={`/auth/signup`} className="btn btn-accent dark:hover:text-black">
-          Sign Up
-        </Link>
-        <button className="btn btn-primary">Sign In</button>
+        <div>
+          {user ? (
+            <button
+              onClick={handleSignOut}
+              className="btn btn-secondary dark:text-accent-content"
+            >
+              Sign Out
+            </button>
+          ) : (
+            <div className="flex gap-3">
+              {" "}
+              <Link
+                to={`/auth/signup`}
+                className="btn btn-accent dark:hover:text-black"
+              >
+                Sign Up
+              </Link>
+              <button className="btn btn-primary">Sign In</button>
+            </div>
+          )}
+        </div>
         <button onClick={toggleTheme}>
           {theme == "light" ? (
             <FaCloudMoon size={25} title="Switch To Dark Mode" />
