@@ -80,9 +80,9 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end flex gap-5">
-        <button className="btn btn-accent dark:hover:text-black">
+        <Link to={`/auth/signup`} className="btn btn-accent dark:hover:text-black">
           Sign Up
-        </button>
+        </Link>
         <button className="btn btn-primary">Sign In</button>
         <button onClick={toggleTheme}>
           {theme == "light" ? (
