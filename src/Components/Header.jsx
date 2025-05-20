@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/logo.png";
+import { RiSunFoggyLine } from "react-icons/ri";
+import { FaCloudMoon } from "react-icons/fa";
+import { Link, NavLink } from "react-router";
 
 const Header = () => {
+  const [theme, setTheme] = useState(
+    document.documentElement.getAttribute("data-theme")
+  );
   const toggleTheme = () => {
     const html = document.documentElement;
     const currentTheme = html.getAttribute("data-theme");
     const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
     html.setAttribute("data-theme", newTheme);
   };
+
+  const links = (
+    <>
+      <li className="text-xl font-semibold">
+        <NavLink to={`/`}>Home</NavLink>
+      </li>
+      <li className="text-xl font-semibold">
+        <NavLink to={`/`}>All Plants</NavLink>
+      </li>
+      <li className="text-xl font-semibold">
+        <NavLink to={`/`}>Add Plants</NavLink>
+      </li>
+      <li className="text-xl font-semibold">
+        <NavLink to={`/`}>My Plants</NavLink>
+      </li>
+      <li className="text-xl font-semibold">
+        <NavLink to={`/error`}>Error</NavLink>
+      </li>
+    </>
+  );
 
   return (
     <div className="navbar w-11/12 mx-auto">
@@ -34,54 +61,31 @@ const Header = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            {links}
           </ul>
         </div>
         <img className="w-10" src={logo} alt="" />
-        <a className="btn btn-ghost text-xl">Root Rhythm</a>
+        <Link
+          to={`/`}
+          className="btn btn-ghost text-xl md:text-2xl lg:text-3xl text-primary font-bold"
+        >
+          <span className="font-light">Root</span>Rhythm
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
-        </ul>
+        <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end">
-        <button onClick={toggleTheme} className="btn">
-          Theme
+      <div className="navbar-end flex gap-5">
+        <button className="btn btn-accent dark:hover:text-black">
+          Sign Up
+        </button>
+        <button className="btn btn-primary">Sign In</button>
+        <button onClick={toggleTheme}>
+          {theme == "light" ? (
+            <FaCloudMoon size={25} title="Switch To Dark Mode" />
+          ) : (
+            <RiSunFoggyLine size={25} title="Switch To Light Mode" />
+          )}
         </button>
       </div>
     </div>
