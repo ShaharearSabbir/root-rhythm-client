@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
 import { RiSunFoggyLine } from "react-icons/ri";
 import { FaCloudMoon } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "./Context/AuthContext";
 
 const Header = () => {
+  const { name } = useContext(AuthContext);
+  console.log(name);
+
   const [theme, setTheme] = useState(
     document.documentElement.getAttribute("data-theme")
   );
