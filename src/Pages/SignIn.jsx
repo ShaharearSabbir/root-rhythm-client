@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 
 const SignIn = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, googleSignIn } = useContext(AuthContext);
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -25,6 +26,12 @@ const SignIn = () => {
         icon: "success",
         title: "Signed in successfully",
       });
+    });
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((userInfo) => {
+      console.log(userInfo);
     });
   };
 
@@ -50,6 +57,13 @@ const SignIn = () => {
             />
             <button className="btn btn-primary w-full mt-4">Sign In</button>
           </form>
+          <div className="divider divider-primary">OR</div>
+          <button
+            onClick={handleGoogleSignIn}
+            className="w-full btn btn-outline btn-primary"
+          >
+            <FcGoogle size={22} /> Sign Up With Google
+          </button>
         </div>
       </div>
     </div>

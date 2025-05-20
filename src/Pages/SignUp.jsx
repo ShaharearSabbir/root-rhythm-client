@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
-  const [imageURL, setImageURL] = useState(null);
+  const { createUser, googleSignIn } = useContext(AuthContext);
+  const [photoURL, setPhotoURL] = useState(null);
   const [loader, setLoader] = useState(false);
   const [uploaded, setUploaded] = useState(false);
 
@@ -22,7 +23,7 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setImageURL(data.data.url);
+        setPhotoURL(data.data.url);
         setLoader(false);
         setUploaded(true);
       });
@@ -37,7 +38,7 @@ const SignUp = () => {
       formData.entries()
     );
     delete userProfile.image;
-    userProfile.imageURL = imageURL;
+    userProfile.photoURL = photoURL;
     console.log(email, password, userProfile);
     createUser(email, password).then((userCredential) => {
       userProfile.email = email;
@@ -73,6 +74,12 @@ const SignUp = () => {
     });
   };
 
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((userInfo) => {
+      console.log(userInfo);
+    });
+  };
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
@@ -81,7 +88,7 @@ const SignUp = () => {
           <form onSubmit={handleSignUp} className="fieldset">
             <label className="label">Name</label>
             <input
-              name="name"
+              name="displayName"
               type="text"
               className="input w-full"
               placeholder="Your Name"
@@ -119,6 +126,13 @@ const SignUp = () => {
             )}
             <button className="btn btn-primary w-full mt-4">Sign Up</button>
           </form>
+          <div className="divider divider-primary">OR</div>
+          <button
+            onClick={handleGoogleSignIn}
+            className="w-full btn btn-outline btn-primary"
+          >
+            <FcGoogle size={22} /> Sign Up With Google
+          </button>
         </div>
       </div>
     </div>

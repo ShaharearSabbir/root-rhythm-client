@@ -3,8 +3,10 @@ import { AuthContext } from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { app } from "../../firebase/firebase-config";
@@ -13,6 +15,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const auth = getAuth(app);
+  const googleProvider = new GoogleAuthProvider();
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -22,17 +25,36 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  const googleSignIn = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
+
   const signOutUser = () => {
     return signOut(auth);
   };
 
   useEffect(() => {
-    const unSubs = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unSubs = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser.providerData[0]?.providerId === "password") {
+        try {
+          const res = await fetch(
+            `http://localhost:5000/user/${currentUser.uid}`
+          );
+          const data = await res.json();
+          const userData = { ...currentUser, ...data };
+          setUser(userData);
+        } catch {
+          setUser(currentUser);
+        }
+      } else {
+        setUser(currentUser);
+      }
+
       console.log(currentUser);
     });
+
     return () => unSubs();
-  });
+  }, []);
 
   const contextData = {
     name: "Shaharear",
@@ -40,6 +62,8 @@ const AuthProvider = ({ children }) => {
     user,
     signOutUser,
     signInUser,
+    googleSignIn,
+    setUser,
   };
 
   return (

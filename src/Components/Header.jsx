@@ -7,10 +7,11 @@ import { AuthContext } from "./Context/AuthContext";
 import Swal from "sweetalert2";
 
 const Header = () => {
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser, setUser } = useContext(AuthContext);
 
   const handleSignOut = () => {
     signOutUser().then(() => {
+      setUser(null);
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -49,7 +50,7 @@ const Header = () => {
         <NavLink to={`/`}>All Plants</NavLink>
       </li>
       <li className="text-xl font-semibold">
-        <NavLink to={`/`}>Add Plants</NavLink>
+        <NavLink to={`/addPlant`}>Add Plants</NavLink>
       </li>
       <li className="text-xl font-semibold">
         <NavLink to={`/`}>My Plants</NavLink>
@@ -102,15 +103,17 @@ const Header = () => {
       <div className="navbar-end flex gap-5">
         <div>
           {user ? (
-            <button
-              onClick={handleSignOut}
-              className="btn btn-secondary dark:text-accent-content"
-            >
-              Sign Out
-            </button>
+            <div className="flex gap-3">
+              <img className="w-10" src={user.photoURL} alt="" />
+              <button
+                onClick={handleSignOut}
+                className="btn btn-secondary dark:text-accent-content"
+              >
+                Sign Out
+              </button>
+            </div>
           ) : (
             <div className="flex gap-3">
-              {" "}
               <Link
                 to={`/auth/signup`}
                 className="btn btn-accent dark:hover:text-black"

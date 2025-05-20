@@ -4,6 +4,7 @@ import Home from "../Pages/Home";
 import AuthLayout from "../Layouts/AuthLayout";
 import SignUp from "../Pages/SignUp";
 import SignIn from "../Pages/SignIn";
+import AddPlant from "../Pages/AddPlant";
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
         path: "/",
         Component: Home,
       },
+      { path: "/addPlant", element: <AddPlant></AddPlant> },
     ],
   },
   {
