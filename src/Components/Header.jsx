@@ -5,6 +5,9 @@ import { FaCloudMoon } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "./Context/AuthContext";
 import Swal from "sweetalert2";
+import { MdLogout } from "react-icons/md";
+import { VscSignIn } from "react-icons/vsc";
+import { GoSignIn } from "react-icons/go";
 
 const Header = () => {
   const { user, signOutUser, setUser } = useContext(AuthContext);
@@ -92,7 +95,7 @@ const Header = () => {
         <img className="w-10" src={logo} alt="" />
         <Link
           to={`/`}
-          className="btn btn-ghost text-xl md:text-2xl lg:text-3xl text-primary font-bold"
+          className="btn hidden md:inline btn-ghost text-xl md:text-2xl lg:text-3xl text-primary font-bold"
         >
           <span className="font-light">Root</span>Rhythm
         </Link>
@@ -109,7 +112,8 @@ const Header = () => {
                 onClick={handleSignOut}
                 className="btn btn-secondary text-accent-content"
               >
-                Sign Out
+                <MdLogout size={20} />
+                <span className="hidden md:inline"> Sign Out</span>
               </button>
             </div>
           ) : (
@@ -118,10 +122,10 @@ const Header = () => {
                 to={`/auth/signup`}
                 className="btn btn-accent dark:hover:text-black"
               >
-                Sign Up
+                <VscSignIn /> <span className="hidden md:inline">Sign Up</span>
               </Link>
               <Link to={`/auth/signin`} className="btn btn-primary">
-                Sign In
+                <GoSignIn /> <span className="hidden md:inline">Sign In</span>
               </Link>
             </div>
           )}

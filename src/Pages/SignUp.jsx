@@ -55,7 +55,6 @@ const SignUp = () => {
             title: "Image uploaded successfully!",
           });
         } else {
-          console.error("Upload failed:", data);
           Toast.fire({
             icon: "error",
             title: "Upload failed. Try again!",
@@ -63,8 +62,8 @@ const SignUp = () => {
         }
         setLoader(false);
       })
-      .catch((error) => {
-        console.error("Error uploading image:", error);
+      .catch((err) => {
+        console.error("Upload Error:", err);
         Toast.fire({
           icon: "error",
           title: "Something went wrong during upload.",
@@ -81,48 +80,66 @@ const SignUp = () => {
     const { email, password, ...userProfile } = Object.fromEntries(
       formData.entries()
     );
+
     delete userProfile.image;
     userProfile.photoURL = photoURL;
-    console.log(email, password, userProfile);
-    createUser(email, password).then((userCredential) => {
-      userProfile.email = email;
-      userProfile.uid = userCredential.user.uid;
-      console.log(userProfile);
-      fetch("http://localhost:5000/users", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(userProfile),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.acknowledged) {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-              },
-            });
-            Toast.fire({
-              icon: "success",
-              title: "Successfully Created Account",
-            });
-            navigate("/");
-          }
+
+    createUser(email, password)
+      .then((userCredential) => {
+        userProfile.email = email;
+        userProfile.uid = userCredential.user.uid;
+
+        return fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userProfile),
         });
-    });
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          Toast.fire({
+            icon: "success",
+            title: "Successfully Created Account",
+          });
+          form.reset();
+          setPhotoURL(null);
+          setUploaded(false);
+          navigate("/");
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: "Account creation failed",
+          });
+        }
+      })
+      .catch((err) => {
+        console.error("Sign Up Error:", err);
+        Toast.fire({
+          icon: "error",
+          title: "Something went wrong!",
+        });
+      });
   };
 
   const handleGoogleSignIn = () => {
-    googleSignIn().then(() => {
-      navigate("/");
-    });
+    googleSignIn()
+      .then(() => {
+        Toast.fire({
+          icon: "success",
+          title: "Signed in with Google",
+        });
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error("Google Sign-In Error:", err);
+        Toast.fire({
+          icon: "error",
+          title: "Google Sign-In Failed",
+        });
+      });
   };
 
   return (

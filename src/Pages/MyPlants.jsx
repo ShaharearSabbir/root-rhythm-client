@@ -19,7 +19,7 @@ const MyPlants = () => {
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
         {plants.map((plant) => (
-          <PlantCard key={plant._id} plant={plant}></PlantCard>
+          <PlantCard key={plant._id} plants={plants} setPlants={setPlants} plant={plant}></PlantCard>
         ))}
       </div>
     </div>

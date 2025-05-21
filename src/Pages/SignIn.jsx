@@ -8,36 +8,59 @@ const SignIn = () => {
   const { signInUser, googleSignIn } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
+  console.log(location.state);
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
 
   const handleSignIn = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const email = e.target.email.value;
     const password = e.target.password.value;
-    signInUser(email, password).then(() => {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
+
+    signInUser(email, password)
+      .then((data) => {
+        console.log(data);
+        Toast.fire({
+          icon: "success",
+          title: "Signed in successfully",
+        });
+        navigate(location.state || "/");
+      })
+      .catch((error) => {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: error.message || "Sign-in failed",
+        });
       });
-      Toast.fire({
-        icon: "success",
-        title: "Signed in successfully",
-      });
-      navigate(location.state || "/");
-    });
   };
 
   const handleGoogleSignIn = () => {
-    googleSignIn().then(() => {
-      navigate(location.state || "/");
-    });
+    googleSignIn()
+      .then(() => {
+        Toast.fire({
+          icon: "success",
+          title: "Signed in with Google",
+        });
+        navigate(location.state || "/");
+      })
+      .catch((err) => {
+        console.error("Google Sign-In Error:", err);
+        Toast.fire({
+          icon: "error",
+          title: "Google Sign-In Failed",
+        });
+      });
   };
 
   return (
@@ -67,7 +90,7 @@ const SignIn = () => {
             onClick={handleGoogleSignIn}
             className="w-full btn btn-outline btn-primary"
           >
-            <FcGoogle size={22} /> Sign Up With Google
+            <FcGoogle size={22} /> Sign In With Google
           </button>
         </div>
       </div>

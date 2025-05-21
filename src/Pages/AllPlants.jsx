@@ -20,7 +20,11 @@ const AllPlants = () => {
         </thead>
         <tbody>
           {plants.map((plant, index) => (
-            <PlantForTable key={plant._id} plant={plant} index={index}></PlantForTable>
+            <PlantForTable
+              key={plant._id}
+              plant={plant}
+              index={index}
+            ></PlantForTable>
           ))}
         </tbody>
       </table>

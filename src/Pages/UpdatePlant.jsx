@@ -23,17 +23,22 @@ const UpdatePlant = () => {
   const [uploaded, setUploaded] = useState(false);
   const navigate = useNavigate();
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
-  });
+  // ✅ Reusable SweetAlert toast function
+  const showToast = (icon, title) => {
+    Swal.fire({
+      toast: true,
+      position: "top-end",
+      icon,
+      title,
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+  };
 
   const handleImageUpload = (e) => {
     setLoader(true);
@@ -41,10 +46,7 @@ const UpdatePlant = () => {
 
     if (!image) {
       setLoader(false);
-      Toast.fire({
-        icon: "error",
-        title: "No image selected!",
-      });
+      showToast("error", "No image selected!");
       return;
     }
 
@@ -62,25 +64,16 @@ const UpdatePlant = () => {
         if (data.success) {
           setPhotoURL(data.data.url);
           setUploaded(true);
-          Toast.fire({
-            icon: "success",
-            title: "Image uploaded successfully!",
-          });
+          showToast("success", "Image uploaded successfully!");
         } else {
           console.error("Upload failed:", data);
-          Toast.fire({
-            icon: "error",
-            title: "Upload failed. Try again!",
-          });
+          showToast("error", "Upload failed. Try again!");
         }
         setLoader(false);
       })
       .catch((error) => {
         console.error("Error uploading image:", error);
-        Toast.fire({
-          icon: "error",
-          title: "Something went wrong during upload.",
-        });
+        showToast("error", "Something went wrong during upload.");
         setLoader(false);
       });
   };
@@ -109,15 +102,7 @@ const UpdatePlant = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          Swal.fire({
-            toast: true,
-            position: "top-end",
-            icon: "success",
-            title: "Plant updated successfully",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-          });
+          showToast("success", "Plant updated successfully");
           navigate(-1);
         } else {
           Swal.fire({
@@ -273,7 +258,7 @@ const UpdatePlant = () => {
             {/* User Name */}
             <label className="label">Name</label>
             <input
-              value={user?.displayName}
+              value={userName}
               name="userName"
               type="text"
               className="input w-full"
@@ -284,7 +269,7 @@ const UpdatePlant = () => {
             {/* User Email */}
             <label className="label">Email</label>
             <input
-              value={user?.email}
+              value={userEmail}
               type="email"
               name="userEmail"
               className="input w-full"
@@ -293,7 +278,7 @@ const UpdatePlant = () => {
             />
 
             {/* Submit Button */}
-            <button className="btn btn-primary w-full mt-4">Add Plant</button>
+            <button className="btn btn-primary w-full mt-4">Update</button>
           </form>
         </div>
       </div>
