@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import image1 from "../../assets/cover (1).jpg";
+import image2 from "../../assets/cover (2).jpg";
+import image3 from "../../assets/cover (3).jpg";
 
 // Import Swiper styles
 import "swiper/css";
@@ -37,15 +40,16 @@ const Banner = () => {
         onAutoplayTimeLeft={onAutoplayTimeLeft}
         className="mySwiper"
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        <SwiperSlide>
+          <img src={image1} alt="" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={image2} alt="" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={image3} alt="" />
+        </SwiperSlide>
+
         <div className="autoplay-progress" slot="container-end">
           <svg viewBox="0 0 48 48" ref={progressCircle}>
             <circle cx="24" cy="24" r="20"></circle>

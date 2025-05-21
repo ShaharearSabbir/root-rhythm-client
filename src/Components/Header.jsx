@@ -53,7 +53,7 @@ const Header = () => {
         <NavLink to={`/allPlants`}>All Plants</NavLink>
       </li>
       <li className="text-lg font-semibold">
-        <NavLink to={`/addPlant`}>Add Plants</NavLink>
+        <NavLink to={`/addPlant`}>Add Plant</NavLink>
       </li>
       <li className="text-lg font-semibold">
         <NavLink to={`/myPlants`}>My Plants</NavLink>
@@ -108,10 +108,7 @@ const Header = () => {
           {user ? (
             <div className="flex gap-3">
               <img className="w-10" src={user.photoURL} alt="" />
-              <button
-                onClick={handleSignOut}
-                className="btn btn-secondary text-accent-content"
-              >
+              <button onClick={handleSignOut} className="btn btn-error">
                 <MdLogout size={20} />
                 <span className="hidden md:inline"> Sign Out</span>
               </button>

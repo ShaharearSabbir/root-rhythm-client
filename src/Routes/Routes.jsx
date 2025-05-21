@@ -12,6 +12,7 @@ import PlantDetails from "../Pages/PlantDetails";
 import Error from "../Pages/Error";
 import MyPlants from "../Pages/MyPlants";
 import UpdatePlant from "../Pages/UpdatePlant";
+import PlantByCategory from "../Pages/PlantByCategory";
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +31,14 @@ export const router = createBrowserRouter([
         Component: AllPlants,
       },
       {
+        path: "/category/:category",
+        Component: PlantByCategory,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/category/${params.category}`),
+      },
+      {
         path: "/addPlant",
+        loader: () => fetch("http://localhost:5000/categories"),
         element: (
           <PrivateRoutes>
             <AddPlant></AddPlant>

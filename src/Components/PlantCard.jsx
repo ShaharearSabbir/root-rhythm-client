@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+import { AuthContext } from "./Context/AuthContext";
 
 const PlantCard = ({ plant, setPlants, plants }) => {
+  const { user } = useContext(AuthContext);
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -48,15 +50,25 @@ const PlantCard = ({ plant, setPlants, plants }) => {
         <h2 className="card-title">{plant.plantName}</h2>
         <p>{plant.description}</p>
         <div className="card-actions justify-end">
-          <Link to={`/updatePlant/${plant._id}`} className="btn btn-primary">
-            Update
+          {user?.email === plant.userEmail && (
+            <div className="space-x-2">
+              <button
+                onClick={() => handleDelete(plant._id)}
+                className="btn btn-error"
+              >
+                Delete
+              </button>
+              <Link
+                to={`/updatePlant/${plant._id}`}
+                className="btn btn-primary"
+              >
+                Update
+              </Link>
+            </div>
+          )}
+          <Link to={`/plantDEtails/${plant._id}`} className="btn btn-primary">
+            View Details
           </Link>
-          <button
-            onClick={() => handleDelete(plant._id)}
-            className="btn btn-secondary text-accent-content"
-          >
-            Delete
-          </button>
         </div>
       </div>
     </div>

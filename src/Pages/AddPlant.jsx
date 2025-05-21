@@ -1,12 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
+import { useLoaderData } from "react-router";
 
 const AddPlant = () => {
+  const initialCategory = useLoaderData();
+  const [categories, setCategories] = useState(initialCategory);
   const { user } = useContext(AuthContext);
   const [photoURL, setPhotoURL] = useState(null);
   const [loader, setLoader] = useState(false);
-  const [uploaded, setUploaded] = useState(false);
+  const [loaderC, setLoaderC] = useState(false);
+  const [categoryPhotoURL, setCategoryPhotoURL] = useState(null);
+  const [categoryName, setCategoryName] = useState("");
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
 
   const handleImageUpload = (e) => {
     setLoader(true);
@@ -24,7 +41,56 @@ const AddPlant = () => {
       .then((data) => {
         setPhotoURL(data.data.url);
         setLoader(false);
-        setUploaded(true);
+        Toast.fire({
+          icon: "success",
+          title: "Image Uploaded Successfully",
+        });
+      });
+  };
+
+  const handleImageUploadForCategory = (e) => {
+    setLoaderC(true);
+    const image = e.target.files[0];
+    const apiKey = import.meta.env.VITE_imgBBKey;
+    const formData = new FormData();
+    formData.append("key", apiKey);
+    formData.append("image", image);
+
+    fetch("https://api.imgbb.com/1/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCategoryPhotoURL(data.data.url);
+        setLoaderC(false);
+        Toast.fire({
+          icon: "success",
+          title: "Image Uploaded Successfully",
+        });
+      });
+  };
+
+  const handleAddCategory = () => {
+    const category = { categoryName, categoryPhotoURL };
+    fetch("http://localhost:5000/category", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(category),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Toast.fire({
+            icon: "success",
+            title: "Category Added Successfully",
+          });
+          setCategories((prevCat) => [...prevCat, category]);
+          document.getElementById("categoryName").value = "";
+          setCategoryPhotoURL(null);
+        }
       });
   };
 
@@ -47,17 +113,6 @@ const AddPlant = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
-            },
-          });
           Toast.fire({
             icon: "success",
             title: "Plant Added Successfully",
@@ -82,33 +137,23 @@ const AddPlant = () => {
               placeholder="Enter plant name"
               required
             />
-
             {/* Category */}
             <label className="label">Category</label>
             <select name="category" className="select w-full" required>
               <option value="">Select Category</option>
-              <option value="succulent">Succulent</option>
-              <option value="fern">Fern</option>
-              <option value="flowering">Flowering</option>
-              <option value="cactus">Cactus</option>
-              <option value="herb">Herb</option>
-              <option value="tree">Tree</option>
-              <option value="shrub">Shrub</option>
-              <option value="vine">Vine</option>
-              <option value="grass">Grass</option>
-              <option value="aquatic">Aquatic</option>
-              <option value="orchid">Orchid</option>
-              <option value="palm">Palm</option>
-              <option value="bamboo">Bamboo</option>
-              <option value="aloe">Aloe</option>
-              <option value="bulb">Bulb</option>
-              <option value="tropical">Tropical</option>
-              <option value="air-plant">Air Plant (Tillandsia)</option>
-              <option value="bonsai">Bonsai</option>
-              <option value="carnivorous">Carnivorous</option>
+              {categories.map((category) => (
+                <option value={category.categoryName}>
+                  {category.categoryName}
+                </option>
+              ))}
             </select>
-
-            {/* Description */}
+            <button
+              className="btn btn-sm btn-accent mt-2"
+              onClick={() => document.getElementById("my_modal_1").showModal()}
+            >
+              Add Category
+            </button>
+            ;{/* Description */}
             <label className="label">Description</label>
             <textarea
               name="description"
@@ -116,7 +161,6 @@ const AddPlant = () => {
               placeholder="Describe your plant"
               required
             ></textarea>
-
             {/* Care Level */}
             <label className="label">Care Level</label>
             <select name="careLevel" className="select w-full" required>
@@ -125,7 +169,6 @@ const AddPlant = () => {
               <option value="moderate">Moderate</option>
               <option value="difficult">Difficult</option>
             </select>
-
             {/* Watering Frequency */}
             <label className="label">Watering Frequency</label>
             <input
@@ -135,7 +178,6 @@ const AddPlant = () => {
               placeholder="e.g., every 3 days"
               required
             />
-
             {/* Last Watered Date */}
             <label className="label">Last Watered Date</label>
             <input
@@ -144,7 +186,6 @@ const AddPlant = () => {
               className="input w-full"
               required
             />
-
             {/* Next Watering Date */}
             <label className="label">Next Watering Date</label>
             <input
@@ -153,7 +194,6 @@ const AddPlant = () => {
               className="input w-full"
               required
             />
-
             {/* Health Status */}
             <label className="label">Health Status</label>
             <input
@@ -163,7 +203,6 @@ const AddPlant = () => {
               placeholder="e.g., Healthy, Needs attention"
               required
             />
-
             {/* Image Upload */}
             <label className="label">Plant Image</label>
             <div className="flex gap-5">
@@ -178,12 +217,6 @@ const AddPlant = () => {
                 <span className="loading loading-spinner text-primary loading-lg"></span>
               )}
             </div>
-            {uploaded && (
-              <p className="text-sm text-success">
-                Image Uploaded Successfully
-              </p>
-            )}
-
             {/* User Name */}
             <label className="label">Name</label>
             <input
@@ -194,7 +227,6 @@ const AddPlant = () => {
               placeholder="Your Name"
               required
             />
-
             {/* User Email */}
             <label className="label">Email</label>
             <input
@@ -205,12 +237,63 @@ const AddPlant = () => {
               placeholder="Email"
               required
             />
-
             {/* Submit Button */}
             <button className="btn btn-primary w-full mt-4">Add Plant</button>
           </form>
         </div>
       </div>
+
+      {/* Modal */}
+
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Add New Category</h3>
+          <div className="space-y-4 my-2">
+            <div>
+              <label className="label">Category Name</label>
+              <input
+                name="categoryName"
+                id="categoryName"
+                type="text"
+                className="input w-full"
+                placeholder="Enter Category Name"
+                onChange={(e) => setCategoryName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-1">
+              {/* Image Upload */}
+              <label className="label">Plant Image</label>
+              <div className="flex gap-5">
+                <input
+                  onChange={handleImageUploadForCategory}
+                  name="image"
+                  type="file"
+                  className="file-input file-input-primary border-none w-full"
+                  required
+                />
+                {loaderC && (
+                  <span className="loading loading-spinner text-primary loading-lg"></span>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button onClick={handleAddCategory} className="btn btn-primary">
+                Add Category
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };
