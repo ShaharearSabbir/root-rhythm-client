@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
       try {
         if (currentUser.providerData[0]?.providerId === "password") {
           const res = await fetch(
-            `http://localhost:5000/user/${currentUser.uid}`
+            `https://root-rhythms-server.vercel.app/user/${currentUser.uid}`
           );
           const data = await res.json();
           const userData = { ...currentUser, ...data };

@@ -6,7 +6,7 @@ const MyPlants = () => {
   const { user } = useContext(AuthContext);
   const [plants, setPlants] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/plants/${user.uid}`)
+    fetch(`https://root-rhythms-server.vercel.app/plants/${user.uid}`)
       .then((res) => res.json())
       .then((data) => {
         setPlants(data);
@@ -19,7 +19,12 @@ const MyPlants = () => {
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
         {plants.map((plant) => (
-          <PlantCard key={plant._id} plants={plants} setPlants={setPlants} plant={plant}></PlantCard>
+          <PlantCard
+            key={plant._id}
+            plants={plants}
+            setPlants={setPlants}
+            plant={plant}
+          ></PlantCard>
         ))}
       </div>
     </div>

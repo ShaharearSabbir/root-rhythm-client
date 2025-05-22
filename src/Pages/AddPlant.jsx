@@ -3,6 +3,7 @@ import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { useLoaderData } from "react-router";
 import { CiCirclePlus } from "react-icons/ci";
+import { format } from "date-fns";
 
 const AddPlant = () => {
   const initialCategory = useLoaderData();
@@ -13,6 +14,13 @@ const AddPlant = () => {
   const [loaderC, setLoaderC] = useState(false);
   const [categoryPhotoURL, setCategoryPhotoURL] = useState(null);
   const [categoryName, setCategoryName] = useState("");
+  const [lastWatered, setLastWatered] = useState("");
+  const [wateringFrequencyTimes, setWateringFrequencyTimes] = useState("");
+  const [wateringFrequencyDays, setWateringFrequencyDays] = useState("");
+  const [wateringFrequencyWeeks, setWateringFrequencyWeeks] = useState("");
+  const [nextWatering, setNextWatering] = useState("");
+
+  const creationDate = format(new Date(), "yyyy-MM-dd");
 
   const Toast = Swal.mixin({
     toast: true,
@@ -25,6 +33,40 @@ const AddPlant = () => {
       toast.onmouseleave = Swal.resumeTimer;
     },
   });
+
+  useEffect(() => {
+    if (
+      lastWatered &&
+      wateringFrequencyTimes &&
+      (wateringFrequencyDays || wateringFrequencyWeeks)
+    ) {
+      const lastWateredDate = new Date(lastWatered);
+      let intervalDays = 0;
+
+      const days = parseInt(wateringFrequencyDays, 10);
+      const weeks = parseInt(wateringFrequencyWeeks, 10);
+
+      if (wateringFrequencyDays) {
+        intervalDays = days;
+      } else if (wateringFrequencyWeeks) {
+        intervalDays = weeks * 7;
+      }
+
+      // Calculate the next date
+      const nextDate = new Date(lastWateredDate);
+      nextDate.setDate(lastWateredDate.getDate() + intervalDays);
+
+      const formattedNextDate = nextDate.toISOString().split("T")[0];
+      setNextWatering(formattedNextDate);
+    } else {
+      setNextWatering("");
+    }
+  }, [
+    lastWatered,
+    wateringFrequencyTimes,
+    wateringFrequencyDays,
+    wateringFrequencyWeeks,
+  ]);
 
   const handleImageUpload = (e) => {
     setLoader(true);
@@ -74,7 +116,7 @@ const AddPlant = () => {
 
   const handleAddCategory = () => {
     const category = { categoryName, categoryPhotoURL };
-    fetch("http://localhost:5000/category", {
+    fetch("https://root-rhythms-server.vercel.app/category", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -103,8 +145,9 @@ const AddPlant = () => {
     delete plantData.image;
     plantData.photoURL = photoURL;
     plantData.uid = user.uid;
+    plantData.creationDate = creationDate;
     console.log(plantData);
-    fetch("http://localhost:5000/plant", {
+    fetch("https://root-rhythms-server.vercel.app/plant", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -177,13 +220,63 @@ const AddPlant = () => {
             </select>
             {/* Watering Frequency */}
             <label className="label">Watering Frequency</label>
-            <input
-              name="wateringFrequency"
-              type="text"
-              className="input w-full"
-              placeholder="e.g., every 3 days"
-              required
-            />
+            <div className="flex space-x-2 items-center">
+              {/* Selector 1: Times */}
+              <select
+                name="wateringFrequencyTimes"
+                className=" input appearance-none bg-white border border-gray-300 rounded-md py-2 px-3 shadow-sm"
+                required
+                value={wateringFrequencyTimes}
+                onChange={(e) => setWateringFrequencyTimes(e.target.value)}
+              >
+                <option value="">Times</option>
+                <option value="1">1 time</option>
+                <option value="2">2 times</option>
+                <option value="3">3 times</option>
+              </select>
+
+              {/* Text separator */}
+              <span className="text-gray-600">in</span>
+
+              {/* Selector 2: Days */}
+              <select
+                name="wateringFrequencyDays"
+                className=" input appearance-none bg-white border border-gray-300 rounded-md py-2 px-3 shadow-sm"
+                value={wateringFrequencyDays}
+                onChange={(e) => {
+                  setWateringFrequencyDays(e.target.value);
+                  // Optional: clear weeks if days selected to enforce one-or-the-other
+                  if (e.target.value) setWateringFrequencyWeeks("");
+                }}
+              >
+                <option value="">Select Days</option>
+                <option value="1">1 day</option>
+                <option value="2">2 days</option>
+                <option value="3">3 days</option>
+                <option value="4">4 days</option>
+                <option value="5">5 days</option>
+                <option value="6">6 days</option>
+                <option value="7">7 days</option>
+              </select>
+
+              {/* Selector 3: Weeks */}
+              <select
+                name="wateringFrequencyWeeks"
+                className=" input appearance-none bg-white border border-gray-300 rounded-md py-2 px-3 shadow-sm"
+                value={wateringFrequencyWeeks}
+                onChange={(e) => {
+                  setWateringFrequencyWeeks(e.target.value);
+                  // Optional: clear days if weeks selected to enforce one-or-the-other
+                  if (e.target.value) setWateringFrequencyDays("");
+                }}
+              >
+                <option value="">Select Weeks</option>
+                <option value="1">1 week</option>
+                <option value="2">2 weeks</option>
+                <option value="3">3 weeks</option>
+                <option value="4">4 weeks</option>
+              </select>
+            </div>
             {/* Last Watered Date */}
             <label className="label">Last Watered Date</label>
             <input
@@ -191,6 +284,8 @@ const AddPlant = () => {
               type="date"
               className="input w-full"
               required
+              value={lastWatered}
+              onChange={(e) => setLastWatered(e.target.value)}
             />
             {/* Next Watering Date */}
             <label className="label">Next Watering Date</label>
@@ -199,16 +294,20 @@ const AddPlant = () => {
               type="date"
               className="input w-full"
               required
+              value={nextWatering}
+              readOnly // Make it read-only as it's auto-calculated
             />
             {/* Health Status */}
             <label className="label">Health Status</label>
-            <input
-              name="healthStatus"
-              type="text"
-              className="input w-full"
-              placeholder="e.g., Healthy, Needs attention"
-              required
-            />
+            <select name="healthStatus" className="input w-full" required>
+              <option value="">Select Health Status</option>
+              <option value="Healthy">Healthy</option>
+              <option value="Stressed">Stressed</option>
+              <option value="Diseased">Diseased</option>
+              <option value="Pest-Infested">Pest-Infested</option>
+              <option value="Recovering">Recovering</option>
+              <option value="Declining/Dying">Declining/Dying</option>
+            </select>
             {/* Image Upload */}
             <label className="label">Plant Image</label>
             <div className="flex gap-5">

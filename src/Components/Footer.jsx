@@ -9,10 +9,10 @@ const Footer = () => {
         <div className="bg-base-200 rounded-full">
           <img src={logo} className="w-30" alt="" />
         </div>
-        <p className="font-bold text-xl">
+        <p className="font-bold text-2xl">
           Root Rhythm
           <br />
-          Helping you since 2023
+          <span className="text-sm font-semibold">Helping you since 2023</span>
         </p>
         <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
       </aside>

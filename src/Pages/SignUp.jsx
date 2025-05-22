@@ -89,7 +89,7 @@ const SignUp = () => {
         userProfile.email = email;
         userProfile.uid = userCredential.user.uid;
 
-        return fetch("http://localhost:5000/users", {
+        return fetch("https://root-rhythms-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

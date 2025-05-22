@@ -4,7 +4,7 @@ import Category from "./Category";
 const AllCategories = () => {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch("https://root-rhythms-server.vercel.app/categories")
       .then((res) => res.json())
       .then((result) => {
         setCategories(result);

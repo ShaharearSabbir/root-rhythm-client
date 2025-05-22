@@ -13,7 +13,9 @@ const PlantDetails = () => {
     nextWatering,
     photoURL,
     plantName,
-    wateringFrequency,
+    wateringFrequencyTimes,
+    wateringFrequencyDays,
+    wateringFrequencyWeeks,
     userName,
     userEmail,
   } = useLoaderData();
@@ -32,7 +34,7 @@ const PlantDetails = () => {
           />
         </div>
         <div className="flex-1 space-y-2">
-          <p>{description}</p>
+          <p className="text-justify">{description}</p>
           <p>Category: {category}</p>
           <p>Health Status: {healthStatus}</p>
         </div>
@@ -49,7 +51,20 @@ const PlantDetails = () => {
         </div>
         <div>
           <h5 className="text-lg font-bold text-primary">Watering Frequency</h5>
-          <p>{wateringFrequency}</p>
+          <p>
+            {`
+            ${wateringFrequencyTimes} ${
+              wateringFrequencyTimes > 1 ? "times in" : "time in"
+            }
+            ${`
+              ${
+                wateringFrequencyDays
+                  ? wateringFrequencyDays + " day"
+                  : wateringFrequencyWeeks + " week"
+              }
+            `}
+            `}
+          </p>
         </div>
         <div>
           <h5 className="text-lg font-bold text-primary">Next Watering</h5>

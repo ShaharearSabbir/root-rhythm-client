@@ -19,7 +19,7 @@ const PlantCard = ({ plant, setPlants, plants }) => {
 
   const handleDelete = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/plant/${id}`, {
+    fetch(`https://root-rhythms-server.vercel.app/plant/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

@@ -27,18 +27,21 @@ export const router = createBrowserRouter([
       },
       {
         path: "/allPlants",
-        loader: () => fetch("http://localhost:5000/plants"),
+        loader: () => fetch("https://root-rhythms-server.vercel.app/plants"),
         Component: AllPlants,
       },
       {
         path: "/category/:category",
         Component: PlantByCategory,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/category/${params.category}`),
+          fetch(
+            `https://root-rhythms-server.vercel.app/category/${params.category}`
+          ),
       },
       {
         path: "/addPlant",
-        loader: () => fetch("http://localhost:5000/categories"),
+        loader: () =>
+          fetch("https://root-rhythms-server.vercel.app/categories"),
         element: (
           <PrivateRoutes>
             <AddPlant></AddPlant>
@@ -48,7 +51,7 @@ export const router = createBrowserRouter([
       {
         path: "/plantDEtails/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/plant/${params.id}`),
+          fetch(`https://root-rhythms-server.vercel.app/plant/${params.id}`),
         element: (
           <PrivateRoutes>
             <PlantDetails></PlantDetails>
@@ -58,7 +61,7 @@ export const router = createBrowserRouter([
       {
         path: "/updatePlant/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/plant/${params.id}`),
+          fetch(`https://root-rhythms-server.vercel.app/plant/${params.id}`),
         element: (
           <PrivateRoutes>
             <UpdatePlant></UpdatePlant>

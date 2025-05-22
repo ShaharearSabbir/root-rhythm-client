@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import { format } from "date-fns";
 
 const UpdatePlant = () => {
   const {
@@ -23,7 +24,8 @@ const UpdatePlant = () => {
   const [uploaded, setUploaded] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Reusable SweetAlert toast function
+  const updatedDate = format(new Date(), "yyyy-MM-dd");
+
   const showToast = (icon, title) => {
     Swal.fire({
       toast: true,
@@ -91,8 +93,9 @@ const UpdatePlant = () => {
     }
 
     plantData.uid = user.uid;
+    plantData.updatedDate = updatedDate;
 
-    fetch(`http://localhost:5000/plant/${_id}`, {
+    fetch(`https://root-rhythms-server.vercel.app/plant/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
