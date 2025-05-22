@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Category from "./Category";
 
-const AllCategories = () => {
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    fetch("https://root-rhythms-server.vercel.app/categories")
-      .then((res) => res.json())
-      .then((result) => {
-        setCategories(result);
-      });
-  }, []);
+const AllCategories = ({ categories }) => {
   return (
     <div>
       <h3 className="text-2xl font-bold mt-20 mb-10">All Categories</h3>

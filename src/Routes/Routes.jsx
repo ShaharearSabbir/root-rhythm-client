@@ -23,6 +23,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         path: "/",
+        loader: () => fetch("https://root-rhythms-server.vercel.app/home"),
         Component: Home,
       },
       {

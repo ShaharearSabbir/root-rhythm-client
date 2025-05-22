@@ -3,17 +3,25 @@ import { AuthContext } from "../Components/Context/AuthContext";
 import PlantCard from "../Components/PlantCard";
 import { Link } from "react-router";
 import { FaCirclePlus } from "react-icons/fa6";
+import Loader from "../Components/Loader";
 
 const MyPlants = () => {
+  const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
   const [plants, setPlants] = useState([]);
   useEffect(() => {
+    setLoading(true);
     fetch(`https://root-rhythms-server.vercel.app/plants/${user.uid}`)
       .then((res) => res.json())
       .then((data) => {
         setPlants(data);
+        setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return <Loader></Loader>;
+  }
   return (
     <div>
       <div className="bg-base-300 p-5 rounded-lg flex justify-between items-center">

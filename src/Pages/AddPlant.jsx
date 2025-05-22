@@ -3,7 +3,6 @@ import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { useLoaderData } from "react-router";
 import { CiCirclePlus } from "react-icons/ci";
-import { format } from "date-fns";
 
 const AddPlant = () => {
   const initialCategory = useLoaderData();
@@ -19,8 +18,6 @@ const AddPlant = () => {
   const [wateringFrequencyDays, setWateringFrequencyDays] = useState("");
   const [wateringFrequencyWeeks, setWateringFrequencyWeeks] = useState("");
   const [nextWatering, setNextWatering] = useState("");
-
-  const creationDate = format(new Date(), "yyyy-MM-dd");
 
   const Toast = Swal.mixin({
     toast: true,
@@ -145,7 +142,6 @@ const AddPlant = () => {
     delete plantData.image;
     plantData.photoURL = photoURL;
     plantData.uid = user.uid;
-    plantData.creationDate = creationDate;
     console.log(plantData);
     fetch("https://root-rhythms-server.vercel.app/plant", {
       method: "POST",
@@ -331,6 +327,7 @@ const AddPlant = () => {
               className="input w-full"
               placeholder="Your Name"
               required
+              readOnly
             />
             {/* User Email */}
             <label className="label">Email</label>
@@ -341,6 +338,7 @@ const AddPlant = () => {
               className="input w-full"
               placeholder="Email"
               required
+              readOnly
             />
             {/* Submit Button */}
             <button className="btn btn-primary w-full mt-4">Add Plant</button>

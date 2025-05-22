@@ -8,7 +8,6 @@ const SignUp = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
   const [photoURL, setPhotoURL] = useState(null);
   const [loader, setLoader] = useState(false);
-  const [uploaded, setUploaded] = useState(false);
   const navigate = useNavigate();
 
   const Toast = Swal.mixin({
@@ -49,7 +48,6 @@ const SignUp = () => {
       .then((data) => {
         if (data.success) {
           setPhotoURL(data.data.url);
-          setUploaded(true);
           Toast.fire({
             icon: "success",
             title: "Image uploaded successfully!",
@@ -74,7 +72,6 @@ const SignUp = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    setUploaded(false);
     const form = e.target;
     const formData = new FormData(form);
     const { email, password, ...userProfile } = Object.fromEntries(
@@ -86,6 +83,8 @@ const SignUp = () => {
 
     createUser(email, password)
       .then((userCredential) => {
+        userCredential.user.displayName = userProfile.displayName;
+        userCredential.user.photoURL = photoURL;
         userProfile.email = email;
         userProfile.uid = userCredential.user.uid;
 
@@ -106,7 +105,6 @@ const SignUp = () => {
           });
           form.reset();
           setPhotoURL(null);
-          setUploaded(false);
           navigate("/");
         } else {
           Toast.fire({
@@ -181,11 +179,6 @@ const SignUp = () => {
                 <span className="loading loading-spinner text-primary loading-lg"></span>
               )}
             </div>
-            {uploaded && (
-              <p className="text-sm text-success">
-                Image Uploaded Successfully
-              </p>
-            )}
             <button className="btn btn-primary w-full mt-4">Sign Up</button>
           </form>
           <div className="divider divider-primary">OR</div>

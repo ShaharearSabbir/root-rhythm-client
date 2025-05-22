@@ -18,8 +18,6 @@ const UpdatePlant = () => {
   const [categories, setCategories] = useState(null);
   const navigate = useNavigate();
 
-  const updatedDate = format(new Date(), "yyyy-MM-dd");
-
   const showToast = (icon, title) => {
     Swal.fire({
       toast: true,
@@ -87,7 +85,6 @@ const UpdatePlant = () => {
     }
 
     plantData.uid = user.uid;
-    plantData.updatedDate = updatedDate;
 
     fetch(`https://root-rhythms-server.vercel.app/plant/${_id}`, {
       method: "PUT",
@@ -137,7 +134,6 @@ const UpdatePlant = () => {
         intervalDays = weeks * 7;
       }
 
-      // Calculate the next date
       const nextDate = new Date(lastWateredDate);
       nextDate.setDate(lastWateredDate.getDate() + intervalDays);
 
@@ -202,26 +198,16 @@ const UpdatePlant = () => {
 
             {/* Care Level */}
             <label className="label">Care Level</label>
-            <select name="careLevel" className="select w-full" required>
+            <select
+              name="careLevel"
+              defaultValue={plant.careLevel}
+              className="select w-full"
+              required
+            >
               <option value="">Select Care Level</option>
-              <option
-                selected={plant.careLevel === "easy" ? true : false}
-                value="easy"
-              >
-                Easy
-              </option>
-              <option
-                selected={plant.careLevel === "moderate" ? true : false}
-                value="moderate"
-              >
-                Moderate
-              </option>
-              <option
-                selected={plant.areLevel === "difficult" ? true : false}
-                value="difficult"
-              >
-                Difficult
-              </option>
+              <option value="easy">Easy</option>
+              <option value="moderate">Moderate</option>
+              <option value="difficult">Difficult</option>
             </select>
 
             {/* Watering Frequency */}
@@ -232,34 +218,13 @@ const UpdatePlant = () => {
                 name="wateringFrequencyTimes"
                 className=" input appearance-none rounded-md py-2 px-3 shadow-sm"
                 required
-                value={wateringFrequencyTimes}
+                defaultValue={plant.wateringFrequencyTimes}
                 onChange={(e) => setWateringFrequencyTimes(e.target.value)}
               >
                 <option value="">Times</option>
-                <option
-                  selected={
-                    plant.plantwateringFrequencyTimes == "1" ? true : false
-                  }
-                  value="1"
-                >
-                  1 time
-                </option>
-                <option
-                  selected={
-                    plant.plantwateringFrequencyTimes == "2" ? true : false
-                  }
-                  value="2"
-                >
-                  2 times
-                </option>
-                <option
-                  selected={
-                    plant.plantwateringFrequencyTimes == "3" ? true : false
-                  }
-                  value="3"
-                >
-                  3 times
-                </option>
+                <option value="1">1 time</option>
+                <option value="2">2 times</option>
+                <option value="3">3 times</option>
               </select>
 
               {/* Text separator */}
@@ -269,94 +234,37 @@ const UpdatePlant = () => {
               <select
                 name="wateringFrequencyDays"
                 className=" input appearance-none  rounded-md py-2 px-3 shadow-sm"
-                value={wateringFrequencyDays}
+                defaultValue={plant.wateringFrequencyDays}
                 onChange={(e) => {
                   setWateringFrequencyDays(e.target.value);
-                  // Optional: clear weeks if days selected to enforce one-or-the-other
                   if (e.target.value) setWateringFrequencyWeeks("");
                 }}
               >
                 <option value="">Select Days</option>
-                <option
-                  selected={plant.wateringFrequencyDays == "1" ? true : false}
-                  value="1"
-                >
-                  1 day
-                </option>
-                <option
-                  selected={plant.wateringFrequencyDays == "2" ? true : false}
-                  value="2"
-                >
-                  2 days
-                </option>
-                <option
-                  selected={plant.wateringFrequencyDays == "3" ? true : false}
-                  value="3"
-                >
-                  3 days
-                </option>
-                <option
-                  selected={plant.wateringFrequencyDays == "4" ? true : false}
-                  value="4"
-                >
-                  4 days
-                </option>
-                <option
-                  selected={plant.wateringFrequencyDays == "5" ? true : false}
-                  value="5"
-                >
-                  5 days
-                </option>
-                <option
-                  selected={plant.wateringFrequencyDays == "6" ? true : false}
-                  value="6"
-                >
-                  6 days
-                </option>
-                <option
-                  selected={plant.wateringFrequencyDays == "7" ? true : false}
-                  value="7"
-                >
-                  7 days
-                </option>
+                <option value="1">1 day</option>
+                <option value="2">2 days</option>
+                <option value="3">3 days</option>
+                <option value="4">4 days</option>
+                <option value="5">5 days</option>
+                <option value="6">6 days</option>
+                <option value="7">7 days</option>
               </select>
 
               {/* Selector 3: Weeks */}
               <select
                 name="wateringFrequencyWeeks"
                 className=" input appearance-none  rounded-md py-2 px-3 shadow-sm"
-                value={wateringFrequencyWeeks}
+                defaultValue={plant.wateringFrequencyWeeks}
                 onChange={(e) => {
                   setWateringFrequencyWeeks(e.target.value);
-                  // Optional: clear days if weeks selected to enforce one-or-the-other
                   if (e.target.value) setWateringFrequencyDays("");
                 }}
               >
                 <option value="">Select Weeks</option>
-                <option
-                  selected={plant.wateringFrequencyWeeks == "1" ? true : false}
-                  value="1"
-                >
-                  1 week
-                </option>
-                <option
-                  selected={plant.wateringFrequencyWeeks == "2" ? true : false}
-                  value="2"
-                >
-                  2 weeks
-                </option>
-                <option
-                  selected={plant.wateringFrequencyWeeks == "3" ? true : false}
-                  value="3"
-                >
-                  3 weeks
-                </option>
-                <option
-                  selected={plant.wateringFrequencyWeeks == "4" ? true : false}
-                  value="4"
-                >
-                  4 weeks
-                </option>
+                <option value="1">1 week</option>
+                <option value="2">2 weeks</option>
+                <option value="3">3 weeks</option>
+                <option value="4">4 weeks</option>
               </select>
             </div>
             {/* Last Watered Date */}
@@ -377,7 +285,6 @@ const UpdatePlant = () => {
               className="input w-full"
               required
               value={nextWateringFromInput}
-              readOnly // Make it read-only as it's auto-calculated
             />
 
             {/* Health Status */}
@@ -419,6 +326,7 @@ const UpdatePlant = () => {
               className="input w-full"
               placeholder="Your Name"
               required
+              readOnly
             />
 
             {/* User Email */}
@@ -430,6 +338,7 @@ const UpdatePlant = () => {
               className="input w-full"
               placeholder="Email"
               required
+              readOnly
             />
 
             {/* Submit Button */}
