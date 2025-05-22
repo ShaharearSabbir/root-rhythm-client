@@ -2,7 +2,15 @@ import React from "react";
 import { Link } from "react-router";
 
 const PlantForTable = ({ plant, index }) => {
-  const { plantName, category, wateringFrequency, photoURL, _id } = plant;
+  const {
+    plantName,
+    category,
+    wateringFrequencyTimes,
+    wateringFrequencyDays,
+    wateringFrequencyWeeks,
+    photoURL,
+    _id,
+  } = plant;
 
   return (
     <tr>
@@ -22,7 +30,23 @@ const PlantForTable = ({ plant, index }) => {
         </div>
       </td>
       <td>{category}</td>
-      <td>{wateringFrequency}</td>
+      <td>
+        {" "}
+        <p>
+          {`
+            ${wateringFrequencyTimes} ${
+            wateringFrequencyTimes > 1 ? "times in" : "time in"
+          }
+            ${`
+              ${
+                wateringFrequencyDays
+                  ? wateringFrequencyDays + " day"
+                  : wateringFrequencyWeeks + " week"
+              }
+            `}
+            `}
+        </p>
+      </td>
       <th>
         <Link to={`/plantDEtails/${_id}`} className="btn btn-primary btn-sm">
           View Details

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useParams } from "react-router";
 import PlantCard from "../Components/PlantCard";
 
 const PlantByCategory = () => {
+  const { category } = useParams();
+
   const initialPlants = useLoaderData;
   const [plants, setPlants] = useState(initialPlants);
   return (
     <div>
       <h3 className="text-2xl bg-base-300 p-5 rounded-lg font-bold">
-        {plants[0]?.category}
+        {category}
       </h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
