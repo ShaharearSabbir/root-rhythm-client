@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLoaderData } from "react-router";
 import PlantForTable from "../Components/plantForTable";
 import Loader from "../Components/Loader";
 

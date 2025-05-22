@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { format } from "date-fns";
 
 const UpdatePlant = () => {
   const plant = useLoaderData();
