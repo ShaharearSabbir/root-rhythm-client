@@ -8,7 +8,7 @@ const PlantByCategory = () => {
   return (
     <div>
       <h3 className="text-2xl bg-base-300 p-5 rounded-lg font-bold">
-        {plants[0].category}
+        {plants[0]?.category}
       </h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">

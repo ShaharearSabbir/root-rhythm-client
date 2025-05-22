@@ -6,7 +6,7 @@ const AllPlants = () => {
   const plants = useLoaderData();
   console.log(plants);
   return (
-    <div className="overflow-x-auto min-h-screen">
+    <div className="overflow-x-auto">
       <table className="table">
         {/* head */}
         <thead>

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router";
+import { AuthContext } from "../Components/Context/AuthContext";
 
 const PlantDetails = () => {
+  const { user } = useContext(AuthContext);
   const {
     careLevel,
     category,
@@ -55,13 +57,15 @@ const PlantDetails = () => {
         </div>
       </div>
 
-      <div className="my-10">
-        <h3 className="text-xl font-bold text-primary">Owner Info</h3>
-        <div>
-          <h5 className="font-semibold">{userName}</h5>
-          <p>Email: {userEmail}</p>
+      {user.email === userEmail || (
+        <div className="my-10">
+          <h3 className="text-xl font-bold text-primary">Owner Info</h3>
+          <div>
+            <h5 className="font-semibold">{userName}</h5>
+            <p>Email: {userEmail}</p>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

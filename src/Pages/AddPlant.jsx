@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { useLoaderData } from "react-router";
+import { CiCirclePlus } from "react-icons/ci";
 
 const AddPlant = () => {
   const initialCategory = useLoaderData();
@@ -139,20 +140,25 @@ const AddPlant = () => {
             />
             {/* Category */}
             <label className="label">Category</label>
-            <select name="category" className="select w-full" required>
-              <option value="">Select Category</option>
-              {categories.map((category) => (
-                <option value={category.categoryName}>
-                  {category.categoryName}
-                </option>
-              ))}
-            </select>
-            <button
-              className="btn btn-sm btn-accent mt-2"
-              onClick={() => document.getElementById("my_modal_1").showModal()}
-            >
-              Add Category
-            </button>
+            <div className="flex items-center gap-2">
+              <select name="category" className="select w-full" required>
+                <option value="">Select Category</option>
+                {categories.map((category) => (
+                  <option value={category.categoryName}>
+                    {category.categoryName}
+                  </option>
+                ))}
+              </select>
+              <button
+                className="btn btn-primary"
+                title="Add Category"
+                onClick={() =>
+                  document.getElementById("my_modal_1").showModal()
+                }
+              >
+                <CiCirclePlus size={30} />
+              </button>
+            </div>
             ;{/* Description */}
             <label className="label">Description</label>
             <textarea

@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { MdLogout } from "react-icons/md";
 import { VscSignIn } from "react-icons/vsc";
 import { GoSignIn } from "react-icons/go";
+import { Tooltip } from "react-tooltip";
 
 const Header = () => {
   const { user, signOutUser, setUser } = useContext(AuthContext);
@@ -107,7 +108,15 @@ const Header = () => {
         <div>
           {user ? (
             <div className="flex gap-3">
-              <img className="w-10" src={user.photoURL} alt="" />
+              <Tooltip id="my-tooltip" />
+              <img
+                className="w-10 h-10 rounded-full object-cover"
+                data-tooltip-id="my-tooltip"
+                data-tooltip-content={user?.displayName}
+                data-tooltip-place="bottom"
+                src={user.photoURL}
+                alt=""
+              />
               <button onClick={handleSignOut} className="btn btn-error">
                 <MdLogout size={20} />
                 <span className="hidden md:inline"> Sign Out</span>
