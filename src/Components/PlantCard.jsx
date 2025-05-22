@@ -38,37 +38,39 @@ const PlantCard = ({ plant, setPlants, plants }) => {
   };
 
   return (
-    <div className="card lg:card-side bg-base-100 shadow-sm">
-      <figure>
+    <div className="lg:card lg:card-side bg-base-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl">
+      <div class="aspect-square lg:max-w-[300px] lg:min-w-[250px]">
         <img
           src={plant.photoURL}
-          className="max-w-[250px] max-h-[200px] object-cover"
-          alt={plant.plantName}
+          alt="Plant Image"
+          class="w-full h-full object-cover"
         />
-      </figure>
+      </div>
       <div className="card-body">
         <h2 className="card-title">{plant.plantName}</h2>
         <p>{plant.description}</p>
-        <div className="card-actions justify-end">
-          {user?.email === plant.userEmail && (
-            <div className="space-x-2">
-              <button
-                onClick={() => handleDelete(plant._id)}
-                className="btn btn-error"
-              >
-                Delete
-              </button>
-              <Link
-                to={`/updatePlant/${plant._id}`}
-                className="btn btn-primary"
-              >
-                Update
-              </Link>
-            </div>
-          )}
-          <Link to={`/plantDEtails/${plant._id}`} className="btn btn-primary">
-            View Details
-          </Link>
+        <div className="w-full flex justify-end items-end">
+          <div className="flex flex-col gap-3 justify-end">
+            {user?.email === plant.userEmail && (
+              <div className="flex flex-col gap-3 justify-end">
+                <button
+                  onClick={() => handleDelete(plant._id)}
+                  className="btn btn-error"
+                >
+                  Delete
+                </button>
+                <Link
+                  to={`/updatePlant/${plant._id}`}
+                  className="btn btn-primary"
+                >
+                  Update
+                </Link>
+              </div>
+            )}
+            <Link to={`/plantDEtails/${plant._id}`} className="btn btn-primary">
+              View Details
+            </Link>
+          </div>
         </div>
       </div>
     </div>

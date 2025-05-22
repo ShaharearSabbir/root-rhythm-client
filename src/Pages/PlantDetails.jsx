@@ -77,7 +77,6 @@ const PlantDetails = () => {
           <h3 className="text-xl font-bold text-primary">Owner Info</h3>
           <div>
             <h5 className="font-semibold">{userName}</h5>
-            <p>Email: {userEmail}</p>
           </div>
         </div>
       )}

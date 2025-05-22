@@ -1,9 +1,6 @@
 import React, { useRef } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import image1 from "../../assets/cover (1).jpg";
-import image2 from "../../assets/cover (2).jpg";
-import image3 from "../../assets/cover (3).jpg";
 
 // Import Swiper styles
 import "swiper/css";
@@ -14,6 +11,9 @@ import "./styles.css";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import Slide1 from "./Slide1";
+import Slide2 from "./Slide2";
+import Slide3 from "./Slide3";
 
 const Banner = () => {
   const progressCircle = useRef(null);
@@ -41,13 +41,13 @@ const Banner = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src={image1} alt="" />
+          <Slide1></Slide1>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={image2} alt="" />
+          <Slide2></Slide2>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={image3} alt="" />
+          <Slide3></Slide3>
         </SwiperSlide>
 
         <div className="autoplay-progress" slot="container-end">

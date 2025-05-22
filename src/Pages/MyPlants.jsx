@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import PlantCard from "../Components/PlantCard";
+import { Link } from "react-router";
+import { FaCirclePlus } from "react-icons/fa6";
 
 const MyPlants = () => {
   const { user } = useContext(AuthContext);
@@ -14,9 +16,13 @@ const MyPlants = () => {
   }, []);
   return (
     <div>
-      <h3 className="text-2xl bg-base-300 p-5 rounded-lg font-bold">
-        My Plants
-      </h3>
+      <div className="bg-base-300 p-5 rounded-lg flex justify-between items-center">
+        <h3 className="text-2xl font-bold">My Plants</h3>
+        <Link to="/addPlant" className="btn btn-primary">
+          {" "}
+          <FaCirclePlus size={18} /> Add Plant
+        </Link>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
         {plants.map((plant) => (
           <PlantCard

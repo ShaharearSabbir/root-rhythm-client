@@ -7,7 +7,7 @@ const WhyUs = () => {
       <h3 className="text-2xl bg-base-300 p-5 rounded-lg font-bold mb-6">
         Why Choose Root Rhythm?
       </h3>
-      <p>
+      <p className="text-justify">
         At Root Rhythm, we're more than just an app; we're your partner in
         cultivating a thriving plant haven. We understand the unique joys and
         challenges of plant parenthood, and we've designed Root Rhythm to be the
@@ -66,7 +66,7 @@ const WhyUs = () => {
                 botanical family.
               </li>
             </ul>
-            <strong>
+            <strong className="text-justify">
               Choose Root Rhythm, and let us help you transform your plant care
               journey from a chore into a joyous, thriving rhythm.
             </strong>

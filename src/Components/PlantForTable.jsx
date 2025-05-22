@@ -10,6 +10,8 @@ const PlantForTable = ({ plant, index }) => {
     wateringFrequencyWeeks,
     photoURL,
     _id,
+    nextWatering,
+    careLevel,
   } = plant;
 
   return (
@@ -47,7 +49,9 @@ const PlantForTable = ({ plant, index }) => {
             `}
         </p>
       </td>
-      <th>
+      <td>{nextWatering}</td>
+      <td>{careLevel}</td>
+      <th className="flex justify-end">
         <Link to={`/plantDEtails/${_id}`} className="btn btn-primary btn-sm">
           View Details
         </Link>
