@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const SignUp = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
@@ -196,6 +196,13 @@ const SignUp = () => {
             <FcGoogle size={22} /> Sign Up With Google
           </button>
         </div>
+        <div className="divider-primary divider mb-5 "></div>
+        <p className="text-center mb-5">
+          Already Have An Account?{" "}
+          <Link className="text-primary hover:font-bold" to="/auth/signin">
+            Sign In
+          </Link>
+        </p>
       </div>
     </div>
   );

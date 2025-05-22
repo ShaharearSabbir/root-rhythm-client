@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 const SignIn = () => {
   const { signInUser, googleSignIn } = useContext(AuthContext);
@@ -23,7 +23,7 @@ const SignIn = () => {
   });
 
   const handleSignIn = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -93,6 +93,13 @@ const SignIn = () => {
             <FcGoogle size={22} /> Sign In With Google
           </button>
         </div>
+        <div className="divider-primary divider mb-5 "></div>
+        <p className="text-center mb-5">
+          New Here?{" "}
+          <Link className="text-primary hover:font-bold" to="/auth/signup">
+            Sign Up
+          </Link>
+        </p>
       </div>
     </div>
   );
