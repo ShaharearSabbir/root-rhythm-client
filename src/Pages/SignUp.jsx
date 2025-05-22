@@ -143,7 +143,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero bg-base-200 min-h-screen p-3 pt-24">
       <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Sign Up Now!</h1>

@@ -7,7 +7,7 @@ const Category = ({ category }) => {
       <Link to={`/category/${category.categoryName}`}>
         <img
           src={category.categoryPhotoURL}
-          className="rounded-full h-64 w-64 object-cover hover:shadow-xl"
+          className="rounded-full h-56 w-56 object-cover hover:shadow-xl"
           alt="Shoes"
         />
         <h2 className="text-xl font-semibold text-center mt-4">

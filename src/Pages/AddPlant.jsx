@@ -202,7 +202,7 @@ const AddPlant = () => {
                 <CiCirclePlus size={30} />
               </button>
             </div>
-            ;{/* Description */}
+            {/* Description */}
             <label className="label">Description</label>
             <textarea
               name="description"
@@ -224,7 +224,7 @@ const AddPlant = () => {
               {/* Selector 1: Times */}
               <select
                 name="wateringFrequencyTimes"
-                className=" input appearance-none bg-white border border-gray-300 rounded-md py-2 px-3 shadow-sm"
+                className=" input appearance-none rounded-md py-2 px-3 shadow-sm"
                 required
                 value={wateringFrequencyTimes}
                 onChange={(e) => setWateringFrequencyTimes(e.target.value)}
@@ -241,7 +241,7 @@ const AddPlant = () => {
               {/* Selector 2: Days */}
               <select
                 name="wateringFrequencyDays"
-                className=" input appearance-none bg-white border border-gray-300 rounded-md py-2 px-3 shadow-sm"
+                className=" input appearance-none  rounded-md py-2 px-3 shadow-sm"
                 value={wateringFrequencyDays}
                 onChange={(e) => {
                   setWateringFrequencyDays(e.target.value);
@@ -262,7 +262,7 @@ const AddPlant = () => {
               {/* Selector 3: Weeks */}
               <select
                 name="wateringFrequencyWeeks"
-                className=" input appearance-none bg-white border border-gray-300 rounded-md py-2 px-3 shadow-sm"
+                className=" input appearance-none  rounded-md py-2 px-3 shadow-sm"
                 value={wateringFrequencyWeeks}
                 onChange={(e) => {
                   setWateringFrequencyWeeks(e.target.value);

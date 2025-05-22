@@ -66,7 +66,7 @@ const Header = () => {
   );
 
   return (
-    <div className="navbar w-11/12 mx-auto">
+    <div className="navbar lg:w-11/12 mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -93,12 +93,14 @@ const Header = () => {
             {links}
           </ul>
         </div>
-        <img className="w-10" src={logo} alt="" />
         <Link
           to={`/`}
-          className="btn hidden md:inline btn-ghost text-xl md:text-2xl lg:text-3xl text-primary font-bold"
+          className="btn btn-ghost text-xl md:text-2xl lg:text-3xl text-primary font-bold flex"
         >
-          <span className="font-light">Root</span>Rhythm
+          <img className="w-10" src={logo} alt="" />
+          <h1 className="hidden lg:inline">
+            <span className="font-light ">Root</span>Rhythm
+          </h1>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

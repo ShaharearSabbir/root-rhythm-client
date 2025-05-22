@@ -1,5 +1,5 @@
 import React from "react";
-import LottieAni from "./LottieAni";
+import LottieForAboutUs from "./LottieForAboutUs";
 
 const AboutUs = () => {
   return (
@@ -48,7 +48,7 @@ const AboutUs = () => {
           </div>
         </div>
         <div className="lg:w-1/2">
-          <LottieAni></LottieAni>
+          <LottieForAboutUs></LottieForAboutUs>
         </div>
       </div>
     </div>
