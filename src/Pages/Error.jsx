@@ -1,9 +1,13 @@
 import React from "react";
 import Header from "../Components/Header";
+import { Helmet } from "react-helmet";
 
 const Error = () => {
   return (
     <div>
+      <Helmet>
+        <title>404 Page Not Found | Root Rhythm</title>
+      </Helmet>
       <div className="bg-base-200 top-0 absolute w-full shadow-md">
         <Header></Header>
       </div>

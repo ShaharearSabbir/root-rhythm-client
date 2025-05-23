@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../assets/logo.png";
 import { FaFacebook, FaYoutube } from "react-icons/fa6";
 import { PiXLogoBold } from "react-icons/pi";
+import { AuthContext } from "./Context/AuthContext";
 
 const Footer = () => {
+  const { name } = useContext(AuthContext);
   return (
     <footer className="footer footer-horizontal footer-center bg-primary text-primary-content p-10">
       <aside>
@@ -16,7 +18,12 @@ const Footer = () => {
           <br />
           <span className="text-sm font-semibold">Helping you since 2023</span>
         </p>
-        <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
+        <p>
+          Copyright © {new Date().getFullYear()} - All right reserved By{" "}
+          <a href="https://github.com/ShaharearSabbir" className="text-yellow-500 hover:font-bold" target="_blank">
+            {name}
+          </a>
+        </p>
       </aside>
       <nav>
         <div className="grid grid-flow-col gap-4">

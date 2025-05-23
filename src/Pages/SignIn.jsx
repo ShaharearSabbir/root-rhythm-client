@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa6";
+import { Helmet } from "react-helmet";
 
 const SignIn = () => {
   const { signInUser, googleSignIn } = useContext(AuthContext);
@@ -65,6 +66,9 @@ const SignIn = () => {
 
   return (
     <div className="hero bg-base-200 min-h-screen p-3 pt-24 ">
+      <Helmet>
+        <title>Sign In | Root Rhythm</title>
+      </Helmet>
       <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl motion-translate-y-in-100">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Sign In Now!</h1>

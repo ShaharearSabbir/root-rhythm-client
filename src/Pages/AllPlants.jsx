@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PlantForTable from "../Components/plantForTable";
 import Loader from "../Components/Loader";
+import { Helmet } from "react-helmet";
 
 const AllPlants = () => {
   const [sortBy, setSortBy] = useState("nextWatering");
@@ -25,6 +26,9 @@ const AllPlants = () => {
 
   return (
     <div className="overflow-x-auto my-16 motion-translate-y-in-100">
+      <Helmet>
+        <title>All Plants | Root Rhythm</title>
+      </Helmet>
       <div className="flex flex-col gap-5 md:flex-row   justify-between md:items-center my-3">
         <h3 className="text-2xl font-bold">All Plants</h3>
         <div className="flex gap-4">

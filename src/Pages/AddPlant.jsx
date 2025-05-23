@@ -3,6 +3,7 @@ import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { useLoaderData } from "react-router";
 import { CiCirclePlus } from "react-icons/ci";
+import { Helmet } from "react-helmet";
 
 const AddPlant = () => {
   const data = useLoaderData();
@@ -164,6 +165,9 @@ const AddPlant = () => {
 
   return (
     <div className="hero min-h-screen motion-translate-y-in-100">
+      <Helmet>
+        <title>Add Plant | Root Rhythm</title>
+      </Helmet>
       <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Add New Plant</h1>

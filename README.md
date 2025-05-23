@@ -18,6 +18,7 @@ With Root Rhythm, you can effortlessly add new plant records, log essential care
 - **Intuitive Dashboard:** A personalized overview of your entire botanical collection, making management effortless.
 - **Data Sorting:** Easily sort your plant collection by various criteria (e.g., last watered, created date).
 - **Mobile-Responsive Design:** Enjoy a consistent and beautiful experience across all devices, from desktop to smartphone.
+- **Dynamic SEO & Metadata:** Leverages `react-helmet` to manage document head properties like title and meta descriptions for improved SEO and social sharing.
 
 ---
 
@@ -36,6 +37,7 @@ With Root Rhythm, you can effortlessly add new plant records, log essential care
 - **Swiper:** A modern touch slider.
 - **Firebase:** Utilized for user authentication (and potentially other client-side services).
 - **Vite:** A fast build tool for the frontend.
+- **React Helmet:** A component that lets you manage all of your document head tags.
 
 ### Deployment
 

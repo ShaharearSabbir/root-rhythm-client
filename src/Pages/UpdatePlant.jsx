@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const UpdatePlant = () => {
   const plant = useLoaderData();
@@ -156,6 +157,9 @@ const UpdatePlant = () => {
 
   return (
     <div className="hero min-h-screen">
+      <Helmet>
+        <title>Uplate {plant.plantName} | Root Rhythm</title>
+      </Helmet>
       <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Update Plant</h1>

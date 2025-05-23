@@ -4,6 +4,7 @@ import PlantCard from "../Components/PlantCard";
 import { Link } from "react-router";
 import { FaCirclePlus } from "react-icons/fa6";
 import Loader from "../Components/Loader";
+import { Helmet } from "react-helmet";
 
 const MyPlants = () => {
   const [loading, setLoading] = useState(false);
@@ -24,6 +25,9 @@ const MyPlants = () => {
   }
   return (
     <div>
+      <Helmet>
+        <title>My Plants | Root Rhythm</title>
+      </Helmet>
       <div className="mt-10 flex justify-between items-center">
         <h3 className="text-2xl font-bold">My Plants</h3>
         <Link to="/addPlant" className="btn btn-primary">

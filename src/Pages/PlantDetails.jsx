@@ -5,6 +5,7 @@ import { FaSunPlantWilt } from "react-icons/fa6";
 import { GiPlantWatering } from "react-icons/gi";
 import { IoWaterOutline } from "react-icons/io5";
 import { RiWaterFlashFill } from "react-icons/ri";
+import { Helmet } from "react-helmet";
 
 const PlantDetails = () => {
   const { user } = useContext(AuthContext);
@@ -26,6 +27,9 @@ const PlantDetails = () => {
 
   return (
     <div className="motion-translate-y-in-100">
+      <Helmet>
+        <title>{plantName} | Root Rhythm</title>
+      </Helmet>
       <h3 className="text-2xl  font-bold">{plantName}</h3>
       <div className="flex flex-col md:flex-row gap-10 justify-around items-center p-5 my-10">
         <div>
