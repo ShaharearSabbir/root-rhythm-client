@@ -110,39 +110,58 @@ const Header = () => {
         <div>
           {user ? (
             <div className="flex gap-3">
-              <Tooltip id="my-tooltip" />
+              <Tooltip id="username" />
               <img
                 className="w-10 h-10 rounded-full object-cover"
-                data-tooltip-id="my-tooltip"
+                data-tooltip-id="username"
                 data-tooltip-content={user?.displayName}
                 data-tooltip-place="bottom"
                 src={user.photoURL}
                 alt=""
               />
-              <button onClick={handleSignOut} className="btn btn-error">
-                <MdLogout size={20} />
-                <span className="hidden md:inline"> Sign Out</span>
+              <button
+                onClick={handleSignOut}
+                className="btn btn-sm md:btn-md  btn-error"
+              >
+                <MdLogout size={20} className="hidden md:inline" />
+                Sign Out
               </button>
             </div>
           ) : (
             <div className="flex gap-3">
               <Link
                 to={`/auth/signup`}
-                className="btn btn-accent dark:hover:text-black"
+                className="btn btn-md hidden btn-accent dark:hover:text-black md:flex"
               >
-                <VscSignIn /> <span className="hidden md:inline">Sign Up</span>
+                <VscSignIn size={20} /> <span> Sign Up</span>
               </Link>
-              <Link to={`/auth/signin`} className="btn btn-primary">
-                <GoSignIn /> <span className="hidden md:inline">Sign In</span>
+              <Link
+                to={`/auth/signin`}
+                className="btn btn-sm md:btn-md btn-primary"
+              >
+                <GoSignIn className="hidden md:inline" size={20} />
+                Sign In
               </Link>
             </div>
           )}
         </div>
+        <Tooltip id="dark" />
+        <Tooltip id="light" />
         <button onClick={toggleTheme}>
           {theme == "light" ? (
-            <FaCloudMoon size={25} title="Switch To Dark Mode" />
+            <FaCloudMoon
+              size={25}
+              data-tooltip-id="dark"
+              data-tooltip-content="Switch To Dark Mode"
+              data-tooltip-place="bottom"
+            />
           ) : (
-            <RiSunFoggyLine size={25} title="Switch To Light Mode" />
+            <RiSunFoggyLine
+              size={25}
+              data-tooltip-id="light"
+              data-tooltip-content="Switch To Light Mode"
+              data-tooltip-place="bottom"
+            />
           )}
         </button>
       </div>

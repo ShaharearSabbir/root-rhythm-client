@@ -1,6 +1,10 @@
 import React, { useContext } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../Components/Context/AuthContext";
+import { FaSunPlantWilt } from "react-icons/fa6";
+import { GiPlantWatering } from "react-icons/gi";
+import { IoWaterOutline } from "react-icons/io5";
+import { RiWaterFlashFill } from "react-icons/ri";
 
 const PlantDetails = () => {
   const { user } = useContext(AuthContext);
@@ -21,10 +25,8 @@ const PlantDetails = () => {
   } = useLoaderData();
 
   return (
-    <div>
-      <h3 className="text-2xl bg-base-300 p-5 rounded-lg font-bold">
-        {plantName}
-      </h3>
+    <div className="motion-translate-y-in-100">
+      <h3 className="text-2xl  font-bold">{plantName}</h3>
       <div className="flex flex-col md:flex-row gap-10 justify-around items-center p-5 my-10">
         <div>
           <img
@@ -35,21 +37,34 @@ const PlantDetails = () => {
         </div>
         <div className="flex-1 space-y-2">
           <p className="text-justify">{description}</p>
-          <p>Category: {category}</p>
-          <p>Health Status: {healthStatus}</p>
+          <p>
+            <strong>Category:</strong> {category}
+          </p>
+          <p>
+            <strong>Health Status:</strong> {healthStatus}
+          </p>
         </div>
       </div>
 
-      <div className="bg-base-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-10 justify-around items-center rounded-lg gap-5">
-        <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-around items-center text-center gap-6">
+        <div className="p-8 bg-base-300 rounded-2xl flex justify-center items-center flex-col gap-2">
+          <div>
+            <FaSunPlantWilt size={80} />
+          </div>
           <h5 className="text-lg font-bold text-primary">Care Level</h5>
           <p>{careLevel}</p>
         </div>
-        <div>
+        <div className="p-8 bg-base-300 rounded-2xl flex justify-center items-center flex-col gap-2">
+          <div>
+            <IoWaterOutline size={80} />
+          </div>
           <h5 className="text-lg font-bold text-primary">Last Watered</h5>
           <p>{lastWatered}</p>
         </div>
-        <div>
+        <div className="p-8 bg-base-300 rounded-2xl flex justify-center items-center flex-col gap-2">
+          <div>
+            <GiPlantWatering size={80} />
+          </div>
           <h5 className="text-lg font-bold text-primary">Watering Frequency</h5>
           <p>
             {`
@@ -66,7 +81,10 @@ const PlantDetails = () => {
             `}
           </p>
         </div>
-        <div>
+        <div className="p-8 bg-base-300 rounded-2xl flex justify-center items-center flex-col gap-2">
+          <div>
+            <RiWaterFlashFill size={80} />
+          </div>
           <h5 className="text-lg font-bold text-primary">Next Watering</h5>
           <p>{nextWatering}</p>
         </div>

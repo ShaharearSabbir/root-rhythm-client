@@ -3,10 +3,8 @@ import LottieForAboutUs from "./LottieForAboutUs";
 
 const AboutUs = () => {
   return (
-    <div className="my-15">
-      <h3 className="text-2xl bg-base-300 p-5 rounded-lg font-bold mb-6">
-        About Us
-      </h3>
+    <div className="my-10 md:my-20 lg:my-32">
+      <h3 className="text-2xl font-bold mb-3">What is Root Rhythm??</h3>
       <div className="flex flex-col-reverse lg:flex-row">
         <div className="flex-1">
           <div className="space-y-4 p-4 *:text-justify">

@@ -24,7 +24,7 @@ const MyPlants = () => {
   }
   return (
     <div>
-      <div className="bg-base-300 p-5 rounded-lg flex justify-between items-center">
+      <div className="mt-10 flex justify-between items-center">
         <h3 className="text-2xl font-bold">My Plants</h3>
         <Link to="/addPlant" className="btn btn-primary">
           {" "}

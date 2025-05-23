@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "tailwindcss-motion";
 
 @plugin "daisyui/theme" {
   name: "light";

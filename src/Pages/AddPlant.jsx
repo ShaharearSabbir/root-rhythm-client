@@ -5,8 +5,8 @@ import { useLoaderData } from "react-router";
 import { CiCirclePlus } from "react-icons/ci";
 
 const AddPlant = () => {
-  const initialCategory = useLoaderData();
-  const [categories, setCategories] = useState(initialCategory);
+  const data = useLoaderData();
+  const [categories, setCategories] = useState(data.categories);
   const { user } = useContext(AuthContext);
   const [photoURL, setPhotoURL] = useState(null);
   const [loader, setLoader] = useState(false);
@@ -142,7 +142,7 @@ const AddPlant = () => {
     delete plantData.image;
     plantData.photoURL = photoURL;
     plantData.uid = user.uid;
-    console.log(plantData);
+
     fetch("https://root-rhythms-server.vercel.app/plant", {
       method: "POST",
       headers: {
@@ -163,7 +163,7 @@ const AddPlant = () => {
   };
 
   return (
-    <div className="hero min-h-screen">
+    <div className="hero min-h-screen motion-translate-y-in-100">
       <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Add New Plant</h1>
@@ -182,8 +182,8 @@ const AddPlant = () => {
             <div className="flex items-center gap-2">
               <select name="category" className="select w-full" required>
                 <option value="">Select Category</option>
-                {categories.map((category) => (
-                  <option value={category.categoryName}>
+                {categories.map((category, index) => (
+                  <option key={index} value={category.categoryName}>
                     {category.categoryName}
                   </option>
                 ))}

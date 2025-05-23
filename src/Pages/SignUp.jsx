@@ -1,14 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
+import { IoEyeSharp } from "react-icons/io5";
+import { FaEyeSlash } from "react-icons/fa6";
 
 const SignUp = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
   const [photoURL, setPhotoURL] = useState(null);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [showPass, setShowPass] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6}$/;
+    if (!regex.test(password)) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }, [password]);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -72,6 +86,14 @@ const SignUp = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
+    if (error) {
+      Toast.fire({
+        icon: "error",
+        title:
+          "Password must have an uppercase, a lowercase and total length of 6",
+      });
+      return;
+    }
     const form = e.target;
     const formData = new FormData(form);
     const { email, password, ...userProfile } = Object.fromEntries(
@@ -142,7 +164,7 @@ const SignUp = () => {
 
   return (
     <div className="hero bg-base-200 min-h-screen p-3 pt-24">
-      <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
+      <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl motion-translate-y-in-100">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Sign Up Now!</h1>
           <form onSubmit={handleSignUp} className="fieldset">
@@ -161,12 +183,22 @@ const SignUp = () => {
               placeholder="Email"
             />
             <label className="label">Password</label>
-            <input
-              name="password"
-              type="password"
-              className="input w-full"
-              placeholder="Password"
-            />
+            <div className="relative">
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                type={showPass ? "password" : "text"}
+                className="input w-full"
+                placeholder="Password"
+              />
+              <button
+                className="absolute right-2 top-2 z-10"
+                type="button"
+                onClick={() => setShowPass(!showPass)}
+              >
+                {showPass ? <IoEyeSharp size={23} /> : <FaEyeSlash size={23} />}
+              </button>
+            </div>
             <label className="label">Photo</label>
             <div className="flex gap-5">
               <input
@@ -179,7 +211,9 @@ const SignUp = () => {
                 <span className="loading loading-spinner text-primary loading-lg"></span>
               )}
             </div>
-            <button className="btn btn-primary w-full mt-4">Sign Up</button>
+            <button type="submit" className="btn btn-primary w-full mt-4">
+              Sign Up
+            </button>
           </form>
           <div className="divider divider-primary">OR</div>
           <button

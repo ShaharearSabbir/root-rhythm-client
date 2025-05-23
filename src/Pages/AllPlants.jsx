@@ -11,13 +11,11 @@ const AllPlants = () => {
   useEffect(() => {
     setLoading(true);
     const url = `https://root-rhythms-server.vercel.app/plants?sortBy=${sortBy}&order=${order}`;
-    console.log(url);
     fetch(url)
       .then((res) => res.json())
       .then((result) => {
         setPlants(result);
         setLoading(false);
-        console.log(result);
       });
   }, [sortBy, order]);
 
@@ -26,8 +24,8 @@ const AllPlants = () => {
   }
 
   return (
-    <div className="overflow-x-auto my-16">
-      <div className="bg-base-300 p-5 rounded-lg flex justify-between items-center my-3">
+    <div className="overflow-x-auto my-16 motion-translate-y-in-100">
+      <div className="flex flex-col gap-5 md:flex-row   justify-between md:items-center my-3">
         <h3 className="text-2xl font-bold">All Plants</h3>
         <div className="flex gap-4">
           <div className="flex items-center gap-3">

@@ -85,7 +85,7 @@ const UpdatePlant = () => {
 
     plantData.uid = user.uid;
 
-    fetch(`https://root-rhythms-server.vercel.app/plant/${_id}`, {
+    fetch(`https://root-rhythms-server.vercel.app/plant/${plant._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -283,7 +283,7 @@ const UpdatePlant = () => {
               type="date"
               className="input w-full"
               required
-              value={nextWateringFromInput}
+              defaultValue={nextWateringFromInput}
             />
 
             {/* Health Status */}

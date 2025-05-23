@@ -2,8 +2,8 @@ import React from "react";
 
 const FAQ = () => {
   return (
-    <div>
-      <div className="bg-base-300 p-5 rounded-lg mt-20 mb-10">
+    <div className="my-10 md:my-20 lg:my-32">
+      <div className="mb-3 lg:my-10">
         <h3 className="text-2xl font-bold">FAQ</h3>
       </div>
       <div className="collapse collapse-plus bg-base-100 border border-base-300">

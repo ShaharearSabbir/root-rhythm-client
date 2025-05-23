@@ -59,8 +59,6 @@ const AuthProvider = ({ children }) => {
       } finally {
         setLoader(false);
       }
-
-      console.log(currentUser);
     });
 
     return () => unSubs();

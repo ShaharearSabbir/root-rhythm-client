@@ -3,10 +3,8 @@ import LottieForWhyUS from "./LottieForWhyUS";
 
 const WhyUs = () => {
   return (
-    <div className="my-15">
-      <h3 className="text-2xl bg-base-300 p-5 rounded-lg font-bold mb-6">
-        Why Choose Root Rhythm?
-      </h3>
+    <div className="my-10 md:my-20 lg:my-32">
+      <h3 className="text-2xl font-bold mb-3">Why Choose Root Rhythm?</h3>
       <p className="text-justify">
         At Root Rhythm, we're more than just an app; we're your partner in
         cultivating a thriving plant haven. We understand the unique joys and

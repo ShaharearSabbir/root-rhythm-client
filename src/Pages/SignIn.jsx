@@ -1,14 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router";
+import { IoEyeSharp } from "react-icons/io5";
+import { FaEyeSlash } from "react-icons/fa6";
 
 const SignIn = () => {
   const { signInUser, googleSignIn } = useContext(AuthContext);
+  const [showPass, setShowPass] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location.state);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -28,8 +30,7 @@ const SignIn = () => {
     const password = e.target.password.value;
 
     signInUser(email, password)
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         Toast.fire({
           icon: "success",
           title: "Signed in successfully",
@@ -37,7 +38,6 @@ const SignIn = () => {
         navigate(location.state || "/");
       })
       .catch((error) => {
-        console.log(error);
         Toast.fire({
           icon: "error",
           title: error.message || "Sign-in failed",
@@ -64,8 +64,8 @@ const SignIn = () => {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen p-3 pt-24">
-      <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
+    <div className="hero bg-base-200 min-h-screen p-3 pt-24 ">
+      <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl motion-translate-y-in-100">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Sign In Now!</h1>
           <form onSubmit={handleSignIn} className="fieldset">
@@ -77,12 +77,21 @@ const SignIn = () => {
               placeholder="Email"
             />
             <label className="label">Password</label>
-            <input
-              name="password"
-              type="password"
-              className="input w-full"
-              placeholder="Password"
-            />
+            <div className="relative">
+              <input
+                name="password"
+                type={showPass ? "password" : "text"}
+                className="input w-full"
+                placeholder="Password"
+              />
+              <button
+                className="absolute right-2 top-2 z-10"
+                type="button"
+                onClick={() => setShowPass(!showPass)}
+              >
+                {showPass ? <IoEyeSharp size={23} /> : <FaEyeSlash size={23} />}
+              </button>
+            </div>
             <button className="btn btn-primary w-full mt-4">Sign In</button>
           </form>
           <div className="divider divider-primary">OR</div>

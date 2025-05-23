@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router";
 import PlantCard from "./PlantCard";
 
-const Latest = ({ latestPlants }) => {
-  const [plants, setPlants] = useState(latestPlants);
+const BeginnerFriendly = ({ easyPlants }) => {
+  const [plants, setPlants] = useState(easyPlants);
+
   return (
     <div className="my-10 md:my-20 lg:my-32">
       <div className="flex justify-between items-center">
-        <h3 className="text-2xl font-bold">New Plants</h3>
+        <h3 className="text-2xl font-bold">Beginner Friendly Plants</h3>
         <Link to="/allPlants" className="btn btn-primary">
           View All
         </Link>
@@ -26,4 +27,4 @@ const Latest = ({ latestPlants }) => {
   );
 };
 
-export default Latest;
+export default BeginnerFriendly;

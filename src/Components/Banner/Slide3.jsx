@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const Slide3 = () => {
   return (
@@ -9,13 +10,13 @@ const Slide3 = () => {
           className="max-w-sm rounded-lg shadow-2xl"
         />
         <div>
-          <h1 className="text-5xl font-bold">Check All The Latest Plants</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
-          <button className="btn btn-primary">Latest Plants</button>
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-5">
+            Ditch the plant care stress. Root Rhythm makes nurturing your green
+            friends simple and rewarding.
+          </h1>
+          <Link to="/auth/signup" className="btn btn-primary">
+            Get Started
+          </Link>
         </div>
       </div>
     </div>

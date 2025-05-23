@@ -40,8 +40,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/addPlant",
-        loader: () =>
-          fetch("https://root-rhythms-server.vercel.app/categories"),
+        loader: () => fetch("https://root-rhythms-server.vercel.app/home"),
         element: (
           <PrivateRoutes>
             <AddPlant></AddPlant>
