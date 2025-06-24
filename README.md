@@ -77,7 +77,7 @@ Ensure you have:
 1.  **Clone the Repository:**
     Start by cloning the frontend repository to your local machine and navigating into its directory:
     ```bash
-    git clone [https://github.com/ShaharearSabbir/root-rhythm-client](https://github.com/ShaharearSabbir/root-rhythm-client)
+    git clone https://github.com/ShaharearSabbir/root-rhythm-client
     cd root-rhythm-frontend # Or whatever your frontend folder is named
     ```
 
@@ -94,7 +94,7 @@ Ensure you have:
 
     If you are using Vite (as indicated in "Technologies Used"), you would commonly create a file named `.env` in the root of your frontend project and add your backend API base URL like this:
     ```env
-    VITE_API_BASE_URL=[https://root-rhythm-server.vercel.app](https://root-rhythm-server.vercel.app) # Replace with your actual backend URL
+    VITE_API_BASE_URL=https://root-rhythm-server.vercel.app # Replace with your actual backend URL
     ```
     * **`VITE_API_BASE_URL`**: The base URL of your deployed Root Rhythm Backend API. This variable will be exposed to your frontend code.
 
