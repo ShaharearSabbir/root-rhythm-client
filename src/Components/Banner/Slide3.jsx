@@ -10,9 +10,8 @@ const Slide3 = () => {
           className="max-w-lg rounded-lg"
         />
         <div>
-          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-5">
-            Ditch the plant care stress. Root Rhythm makes nurturing your green
-            friends simple and rewarding.
+          <h1 className="text-xl md:text-3xl lg:text-5xl font-bold mb-5">
+            Ditch the plant care stress
           </h1>
           <Link to="/auth/signup" className="btn btn-primary">
             Get Started

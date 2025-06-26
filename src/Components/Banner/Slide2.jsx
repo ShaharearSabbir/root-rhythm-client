@@ -10,7 +10,7 @@ const Slide2 = () => {
           className="max-w-lg rounded-lg"
         />
         <div>
-          <h1 className="text-5xl font-bold">Check Your Plants</h1>
+          <h1 className="text-xl md:text-3xl lg:text-5xl font-bold">Check Your Plants</h1>
           <Link to="/dashboard/myPlants" className="btn btn-primary my-5">
             My Plants
           </Link>
