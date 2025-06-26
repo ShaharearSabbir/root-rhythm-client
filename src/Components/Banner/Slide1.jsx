@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const Slide1 = () => {
   return (
     <div
-      className="hero min-h-screen"
+      className="hero min-h-[60vh]"
       style={{
         backgroundImage: "url(https://i.ibb.co/zTTfj665/cover-1.jpg)",
       }}

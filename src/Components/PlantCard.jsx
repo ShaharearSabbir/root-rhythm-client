@@ -2,21 +2,11 @@ import React, { useContext } from "react";
 import { Link, useLocation } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "./Context/AuthContext";
+import { Toast } from "../util/utils";
 
 const PlantCard = ({ plant, setPlants, plants }) => {
   const location = useLocation();
   const { user } = useContext(AuthContext);
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
-  });
 
   const handleDelete = (id) => {
     fetch(`https://root-rhythms-server.vercel.app/plant/${id}`, {
@@ -36,8 +26,8 @@ const PlantCard = ({ plant, setPlants, plants }) => {
   };
 
   return (
-    <div className="lg:card lg:card-side bg-base-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl motion-translate-y-in-100">
-      <div className="aspect-square lg:max-w-[300px] lg:min-w-[250px]">
+    <div className="lg:card lg:card-side bg-base-100 rounded-2xl overflow-hidden hover:shadow border-2 border-base-200 motion-translate-y-in-100">
+      <div className="aspect-square lg:max-w-[300px] lg:min-w-[300px]">
         <img
           src={plant.photoURL}
           alt="Plant Image"
@@ -46,7 +36,6 @@ const PlantCard = ({ plant, setPlants, plants }) => {
       </div>
       <div className="w-full p-10 space-y-2">
         <h2 className="text-xl font-bold">{plant.plantName}</h2>
-        <p>{plant.description}</p>
         <p>
           <strong>Category: </strong> {plant.category}
         </p>
@@ -56,7 +45,7 @@ const PlantCard = ({ plant, setPlants, plants }) => {
         <div className="w-full flex justify-end mt-8 items-end">
           <div className="flex flex-col gap-3 justify-end">
             {user?.email === plant.userEmail &&
-              location.pathname === "/myPlants" && (
+              location.pathname === "/dashboard/myPlants" && (
                 <div className="flex flex-col gap-3 justify-end">
                   <button
                     onClick={() => handleDelete(plant._id)}
@@ -65,7 +54,7 @@ const PlantCard = ({ plant, setPlants, plants }) => {
                     Delete
                   </button>
                   <Link
-                    to={`/updatePlant/${plant._id}`}
+                    to={`/dashboard/updatePlant/${plant._id}`}
                     className="btn btn-primary"
                   >
                     Update
@@ -73,7 +62,7 @@ const PlantCard = ({ plant, setPlants, plants }) => {
                 </div>
               )}
             <Link to={`/plantDEtails/${plant._id}`} className="btn btn-primary">
-              View Details
+              Show More
             </Link>
           </div>
         </div>

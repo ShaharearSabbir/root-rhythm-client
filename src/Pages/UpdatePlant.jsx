@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import { useLoaderData, useNavigate } from "react-router";
-import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import { Toast } from "../util/utils";
 
 const UpdatePlant = () => {
   const plant = useLoaderData();
@@ -18,29 +18,13 @@ const UpdatePlant = () => {
   const [categories, setCategories] = useState(null);
   const navigate = useNavigate();
 
-  const showToast = (icon, title) => {
-    Swal.fire({
-      toast: true,
-      position: "top-end",
-      icon,
-      title,
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      },
-    });
-  };
-
   const handleImageUpload = (e) => {
     setLoader(true);
     const image = e.target.files[0];
 
     if (!image) {
       setLoader(false);
-      showToast("error", "No image selected!");
+      Toast.fire({ icon: "error", title: "No image selected!" });
       return;
     }
 
@@ -58,16 +42,22 @@ const UpdatePlant = () => {
         if (data.success) {
           setPhotoURL(data.data.url);
           setUploaded(true);
-          showToast("success", "Image uploaded successfully!");
+          Toast.fire({
+            icon: "success",
+            title: "Image uploaded successfully!",
+          });
         } else {
           console.error("Upload failed:", data);
-          showToast("error", "Upload failed. Try again!");
+          Toast.fire({ icon: "error", title: "Upload failed. Try again!" });
         }
         setLoader(false);
       })
       .catch((error) => {
         console.error("Error uploading image:", error);
-        showToast("error", "Something went wrong during upload.");
+        Toast.fire({
+          icon: "error",
+          title: "Something went wrong during upload.",
+        });
         setLoader(false);
       });
   };
@@ -96,10 +86,10 @@ const UpdatePlant = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          showToast("success", "Plant updated successfully");
+          Toast.fire({ icon: "success", title: "Plant updated successfully" });
           navigate(-1);
         } else {
-          Swal.fire({
+          Toast.fire({
             icon: "error",
             title: "Update failed",
             text: "Could not update the plant.",
@@ -108,7 +98,7 @@ const UpdatePlant = () => {
       })
       .catch((err) => {
         console.error("Update error:", err);
-        Swal.fire({
+        Toast.fire({
           icon: "error",
           title: "Something went wrong",
           text: "Failed to update plant.",
@@ -156,194 +146,219 @@ const UpdatePlant = () => {
   }, []);
 
   return (
-    <div className="hero min-h-screen">
+    <div className="hero">
       <Helmet>
         <title>Uplate {plant.plantName} | Root Rhythm</title>
       </Helmet>
-      <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
+      <div className="card bg-base-100 w-full">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Update Plant</h1>
           <form onSubmit={handleUpdate} className="fieldset">
-            {/* Plant Name */}
-            <label className="label">Plant Name</label>
-            <input
-              defaultValue={plant.plantName}
-              name="plantName"
-              type="text"
-              className="input w-full"
-              placeholder="Enter plant name"
-              required
-            />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              {/* Plant Name */}
+              <div>
+                <label className="label">Plant Name</label>
+                <input
+                  defaultValue={plant.plantName}
+                  name="plantName"
+                  type="text"
+                  className="input w-full"
+                  placeholder="Enter plant name"
+                  required
+                />
+              </div>
 
-            {/* Category */}
-            <label className="label">Category</label>
-            <select name="category" className="select w-full" required>
-              <option value="">Select Category</option>
-              {categories?.map((cat) => (
-                <option
-                  selected={plant.category === cat.categoryName ? true : false}
-                  value={cat.categoryName}
+              {/* Category */}
+              <div>
+                <label className="label">Category</label>
+                <select name="category" className="select w-full" required>
+                  <option value="">Select Category</option>
+                  {categories?.map((cat) => (
+                    <option
+                      selected={
+                        plant.category === cat.categoryName ? true : false
+                      }
+                      value={cat.categoryName}
+                    >
+                      {cat.categoryName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Description */}
+              <div>
+                <label className="label">Description</label>
+                <textarea
+                  defaultValue={plant.description}
+                  name="description"
+                  className="textarea w-full"
+                  placeholder="Describe your plant"
+                  required
+                ></textarea>
+              </div>
+
+              {/* Care Level */}
+              <div>
+                <label className="label">Care Level</label>
+                <select
+                  name="careLevel"
+                  defaultValue={plant.careLevel}
+                  className="select w-full"
+                  required
                 >
-                  {cat.categoryName}
-                </option>
-              ))}
-            </select>
+                  <option value="">Select Care Level</option>
+                  <option value="easy">Easy</option>
+                  <option value="moderate">Moderate</option>
+                  <option value="difficult">Difficult</option>
+                </select>
+              </div>
 
-            {/* Description */}
-            <label className="label">Description</label>
-            <textarea
-              defaultValue={plant.description}
-              name="description"
-              className="textarea w-full"
-              placeholder="Describe your plant"
-              required
-            ></textarea>
+              {/* Watering Frequency */}
+              <div>
+                <label className="label">Watering Frequency</label>
+                <div className="flex space-x-2 items-center">
+                  {/* Selector 1: Times */}
+                  <select
+                    name="wateringFrequencyTimes"
+                    className=" input appearance-none rounded-md py-2 px-3 shadow-sm"
+                    required
+                    defaultValue={plant.wateringFrequencyTimes}
+                    onChange={(e) => setWateringFrequencyTimes(e.target.value)}
+                  >
+                    <option value="">Times</option>
+                    <option value="1">1 time</option>
+                    <option value="2">2 times</option>
+                    <option value="3">3 times</option>
+                  </select>
 
-            {/* Care Level */}
-            <label className="label">Care Level</label>
-            <select
-              name="careLevel"
-              defaultValue={plant.careLevel}
-              className="select w-full"
-              required
-            >
-              <option value="">Select Care Level</option>
-              <option value="easy">Easy</option>
-              <option value="moderate">Moderate</option>
-              <option value="difficult">Difficult</option>
-            </select>
+                  {/* Text separator */}
+                  <span className="text-gray-600">in</span>
 
-            {/* Watering Frequency */}
-            <label className="label">Watering Frequency</label>
-            <div className="flex space-x-2 items-center">
-              {/* Selector 1: Times */}
-              <select
-                name="wateringFrequencyTimes"
-                className=" input appearance-none rounded-md py-2 px-3 shadow-sm"
-                required
-                defaultValue={plant.wateringFrequencyTimes}
-                onChange={(e) => setWateringFrequencyTimes(e.target.value)}
-              >
-                <option value="">Times</option>
-                <option value="1">1 time</option>
-                <option value="2">2 times</option>
-                <option value="3">3 times</option>
-              </select>
+                  {/* Selector 2: Days */}
+                  <select
+                    name="wateringFrequencyDays"
+                    className=" input appearance-none  rounded-md py-2 px-3 shadow-sm"
+                    defaultValue={plant.wateringFrequencyDays}
+                    onChange={(e) => {
+                      setWateringFrequencyDays(e.target.value);
+                      if (e.target.value) setWateringFrequencyWeeks("");
+                    }}
+                  >
+                    <option value="">Select Days</option>
+                    <option value="1">1 day</option>
+                    <option value="2">2 days</option>
+                    <option value="3">3 days</option>
+                    <option value="4">4 days</option>
+                    <option value="5">5 days</option>
+                    <option value="6">6 days</option>
+                    <option value="7">7 days</option>
+                  </select>
 
-              {/* Text separator */}
-              <span className="text-gray-600">in</span>
+                  {/* Selector 3: Weeks */}
+                  <select
+                    name="wateringFrequencyWeeks"
+                    className=" input appearance-none  rounded-md py-2 px-3 shadow-sm"
+                    defaultValue={plant.wateringFrequencyWeeks}
+                    onChange={(e) => {
+                      setWateringFrequencyWeeks(e.target.value);
+                      if (e.target.value) setWateringFrequencyDays("");
+                    }}
+                  >
+                    <option value="">Select Weeks</option>
+                    <option value="1">1 week</option>
+                    <option value="2">2 weeks</option>
+                    <option value="3">3 weeks</option>
+                    <option value="4">4 weeks</option>
+                  </select>
+                </div>
+              </div>
+              {/* Last Watered Date */}
+              <div>
+                <label className="label">Last Watered Date</label>
+                <input
+                  name="lastWatered"
+                  type="date"
+                  className="input w-full"
+                  required
+                  value={lastWateredFromInput}
+                  onChange={(e) => setLastWateredFromInput(e.target.value)}
+                />
+              </div>
+              {/* Next Watering Date */}
+              <div>
+                <label className="label">Next Watering Date</label>
+                <input
+                  name="nextWatering"
+                  type="date"
+                  className="input w-full"
+                  required
+                  defaultValue={nextWateringFromInput}
+                />
+              </div>
 
-              {/* Selector 2: Days */}
-              <select
-                name="wateringFrequencyDays"
-                className=" input appearance-none  rounded-md py-2 px-3 shadow-sm"
-                defaultValue={plant.wateringFrequencyDays}
-                onChange={(e) => {
-                  setWateringFrequencyDays(e.target.value);
-                  if (e.target.value) setWateringFrequencyWeeks("");
-                }}
-              >
-                <option value="">Select Days</option>
-                <option value="1">1 day</option>
-                <option value="2">2 days</option>
-                <option value="3">3 days</option>
-                <option value="4">4 days</option>
-                <option value="5">5 days</option>
-                <option value="6">6 days</option>
-                <option value="7">7 days</option>
-              </select>
+              {/* Health Status */}
+              <div>
+                <label className="label">Health Status</label>
+                <input
+                  defaultValue={plant.healthStatus}
+                  name="healthStatus"
+                  type="text"
+                  className="input w-full"
+                  placeholder="e.g., Healthy, Needs attention"
+                  required
+                />
+              </div>
 
-              {/* Selector 3: Weeks */}
-              <select
-                name="wateringFrequencyWeeks"
-                className=" input appearance-none  rounded-md py-2 px-3 shadow-sm"
-                defaultValue={plant.wateringFrequencyWeeks}
-                onChange={(e) => {
-                  setWateringFrequencyWeeks(e.target.value);
-                  if (e.target.value) setWateringFrequencyDays("");
-                }}
-              >
-                <option value="">Select Weeks</option>
-                <option value="1">1 week</option>
-                <option value="2">2 weeks</option>
-                <option value="3">3 weeks</option>
-                <option value="4">4 weeks</option>
-              </select>
+              {/* Image Upload */}
+              <div>
+                <label className="label">Plant Image</label>
+                <div className="flex gap-5">
+                  <input
+                    onChange={handleImageUpload}
+                    name="image"
+                    type="file"
+                    className="file-input file-input-primary border-none w-full"
+                  />
+                  {loader && (
+                    <span className="loading loading-spinner text-primary loading-lg"></span>
+                  )}
+                </div>
+                {uploaded && (
+                  <p className="text-sm text-success">
+                    Image Uploaded Successfully
+                  </p>
+                )}
+              </div>
+
+              {/* User Name */}
+              <div>
+                <label className="label">Name</label>
+                <input
+                  value={plant.userName}
+                  name="userName"
+                  type="text"
+                  className="input w-full"
+                  placeholder="Your Name"
+                  required
+                  readOnly
+                />
+              </div>
+
+              {/* User Email */}
+              <div>
+                <label className="label">Email</label>
+                <input
+                  value={plant.userEmail}
+                  type="email"
+                  name="userEmail"
+                  className="input w-full"
+                  placeholder="Email"
+                  required
+                  readOnly
+                />
+              </div>
             </div>
-            {/* Last Watered Date */}
-            <label className="label">Last Watered Date</label>
-            <input
-              name="lastWatered"
-              type="date"
-              className="input w-full"
-              required
-              value={lastWateredFromInput}
-              onChange={(e) => setLastWateredFromInput(e.target.value)}
-            />
-            {/* Next Watering Date */}
-            <label className="label">Next Watering Date</label>
-            <input
-              name="nextWatering"
-              type="date"
-              className="input w-full"
-              required
-              defaultValue={nextWateringFromInput}
-            />
-
-            {/* Health Status */}
-            <label className="label">Health Status</label>
-            <input
-              defaultValue={plant.healthStatus}
-              name="healthStatus"
-              type="text"
-              className="input w-full"
-              placeholder="e.g., Healthy, Needs attention"
-              required
-            />
-
-            {/* Image Upload */}
-            <label className="label">Plant Image</label>
-            <div className="flex gap-5">
-              <input
-                onChange={handleImageUpload}
-                name="image"
-                type="file"
-                className="file-input file-input-primary border-none w-full"
-              />
-              {loader && (
-                <span className="loading loading-spinner text-primary loading-lg"></span>
-              )}
-            </div>
-            {uploaded && (
-              <p className="text-sm text-success">
-                Image Uploaded Successfully
-              </p>
-            )}
-
-            {/* User Name */}
-            <label className="label">Name</label>
-            <input
-              value={plant.userName}
-              name="userName"
-              type="text"
-              className="input w-full"
-              placeholder="Your Name"
-              required
-              readOnly
-            />
-
-            {/* User Email */}
-            <label className="label">Email</label>
-            <input
-              value={plant.userEmail}
-              type="email"
-              name="userEmail"
-              className="input w-full"
-              placeholder="Email"
-              required
-              readOnly
-            />
-
             {/* Submit Button */}
             <button className="btn btn-primary w-full mt-4">Update</button>
           </form>

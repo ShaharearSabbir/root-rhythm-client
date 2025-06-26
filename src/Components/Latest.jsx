@@ -12,7 +12,7 @@ const Latest = ({ latestPlants }) => {
           View All
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 my-6 lg:my-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 my-6 lg:my-10">
         {plants.map((plant) => (
           <PlantCard
             key={plant._id}

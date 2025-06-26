@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { FaCirclePlus } from "react-icons/fa6";
 import Loader from "../Components/Loader";
 import { Helmet } from "react-helmet";
+import PageHeader from "../Components/Shared/PageHeader";
 
 const MyPlants = () => {
   const [loading, setLoading] = useState(false);
@@ -28,12 +29,9 @@ const MyPlants = () => {
       <Helmet>
         <title>My Plants | Root Rhythm</title>
       </Helmet>
-      <div className="mt-10 flex justify-between items-center">
-        <h3 className="text-2xl font-bold">My Plants</h3>
-        <Link to="/addPlant" className="btn btn-primary">
-          {" "}
-          <FaCirclePlus size={18} /> Add Plant
-        </Link>
+      <div className="p-8 text-center">
+        <PageHeader>My Plants</PageHeader>
+        <p className="text-lg opacity-90">List of my plants</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
         {plants.map((plant) => (

@@ -1,11 +1,15 @@
 import React from "react";
-import LottieForAboutUs from "./LottieForAboutUs";
+import LottieForAboutUs from "../Components/LottieForAboutUs";
+import PageHeader from "../Components/Shared/PageHeader";
 
 const AboutUs = () => {
   return (
-    <div className="my-10 md:my-20 lg:my-32">
-      <h3 className="text-2xl font-bold mb-3">What is Root Rhythm??</h3>
-      <div className="flex flex-col-reverse lg:flex-row">
+    <div>
+      <div className="p-8 text-center rounded-t-lg">
+        <PageHeader>About Root Rhythm</PageHeader>
+        <p className="text-lg opacity-90">Read more about us</p>
+      </div>
+      <div className="flex flex-col-reverse lg:flex-row mt-10">
         <div className="flex-1">
           <div className="space-y-4 p-4 *:text-justify">
             <p className="">

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import PlantForTable from "../Components/plantForTable";
-import Loader from "../Components/Loader";
+import PlantForTable from "../../Components/plantForTable";
+import Loader from "../../Components/Loader";
 import { Helmet } from "react-helmet";
+import PageHeader from "../../Components/Shared/PageHeader";
 
 const AllPlants = () => {
   const [sortBy, setSortBy] = useState("nextWatering");
@@ -25,12 +26,15 @@ const AllPlants = () => {
   }
 
   return (
-    <div className="overflow-x-auto my-16 motion-translate-y-in-100">
+    <div className="overflow-x-auto motion-translate-y-in-100">
       <Helmet>
         <title>All Plants | Root Rhythm</title>
       </Helmet>
-      <div className="flex flex-col gap-5 md:flex-row   justify-between md:items-center my-3">
-        <h3 className="text-2xl font-bold">All Plants</h3>
+      <div className="p-8 text-center">
+        <PageHeader>All Plants</PageHeader>
+        <p className="text-lg opacity-90">A list of plants</p>
+      </div>
+      <div className="flex flex-col gap-5 md:flex-row justify-end md:items-center my-3">
         <div className="flex gap-4">
           <div className="flex items-center gap-3">
             <p>Sort By</p>
@@ -82,7 +86,6 @@ const AllPlants = () => {
             <th>Plant Name</th>
             <th>Category</th>
             <th>Watering Frequency</th>
-            <th>Next Watering Day</th>
             <th>Care Level</th>
             <th></th>
           </tr>

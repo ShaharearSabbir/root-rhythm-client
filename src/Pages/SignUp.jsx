@@ -164,11 +164,11 @@ const SignUp = () => {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen p-3 pt-24">
+    <div className="hero min-h-screen p-3 pt-24">
       <Helmet>
         <title>Sign Up | Root Rhythm</title>
       </Helmet>
-      <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl motion-translate-y-in-100">
+      <div className="card w-full max-w-md  motion-translate-y-in-100">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Sign Up Now!</h1>
           <form onSubmit={handleSignUp} className="fieldset">
@@ -226,11 +226,11 @@ const SignUp = () => {
           >
             <FcGoogle size={22} /> Sign Up With Google
           </button>
+          <div className="divider-primary divider mb-5"></div>
         </div>
-        <div className="divider-primary divider mb-5 "></div>
         <p className="text-center mb-5">
           Already Have An Account?{" "}
-          <Link className="text-primary hover:font-bold" to="/auth/signin">
+          <Link className="text-primary hover:text-secondary" to="/auth/signin">
             Sign In
           </Link>
         </p>

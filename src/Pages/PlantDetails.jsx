@@ -6,6 +6,7 @@ import { GiPlantWatering } from "react-icons/gi";
 import { IoWaterOutline } from "react-icons/io5";
 import { RiWaterFlashFill } from "react-icons/ri";
 import { Helmet } from "react-helmet";
+import PageHeader from "../Components/Shared/PageHeader";
 
 const PlantDetails = () => {
   const { user } = useContext(AuthContext);
@@ -30,7 +31,7 @@ const PlantDetails = () => {
       <Helmet>
         <title>{plantName} | Root Rhythm</title>
       </Helmet>
-      <h3 className="text-2xl  font-bold">{plantName}</h3>
+      <PageHeader>{plantName}</PageHeader>
       <div className="flex flex-col md:flex-row gap-10 justify-around items-center p-5 my-10">
         <div>
           <img
@@ -94,12 +95,12 @@ const PlantDetails = () => {
         </div>
       </div>
 
-      {user.email === userEmail || (
+      {user?.email === userEmail || (
         <div className="my-10">
           <h3 className="text-xl font-bold text-primary">Owner Info</h3>
           <div>
             <h5 className="font-semibold">{userName}</h5>
-          </div>
+          </div>*
         </div>
       )}
     </div>

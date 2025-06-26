@@ -65,11 +65,11 @@ const SignIn = () => {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen p-3 pt-24 ">
+    <div className="hero min-h-screen p-3 pt-24 ">
       <Helmet>
         <title>Sign In | Root Rhythm</title>
       </Helmet>
-      <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl motion-translate-y-in-100">
+      <div className="card w-full max-w-md motion-translate-y-in-100">
         <div className="card-body">
           <h1 className="text-3xl font-bold text-center">Sign In Now!</h1>
           <form onSubmit={handleSignIn} className="fieldset">
@@ -105,11 +105,12 @@ const SignIn = () => {
           >
             <FcGoogle size={22} /> Sign In With Google
           </button>
+          <div className="divider-primary divider mb-5 "></div>
         </div>
-        <div className="divider-primary divider mb-5 "></div>
+
         <p className="text-center mb-5">
           New Here?{" "}
-          <Link className="text-primary hover:font-bold" to="/auth/signup">
+          <Link className="text-primary hover:text-secondary" to="/auth/signup">
             Sign Up
           </Link>
         </p>

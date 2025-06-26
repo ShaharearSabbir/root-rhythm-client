@@ -20,20 +20,24 @@ const Footer = () => {
         </p>
         <p>
           Copyright © {new Date().getFullYear()} - All right reserved By{" "}
-          <a href="https://github.com/ShaharearSabbir" className="text-yellow-500 hover:font-bold" target="_blank">
+          <a
+            href="https://github.com/ShaharearSabbir"
+            className="text-yellow-500 hover:text-yellow-600"
+            target="_blank"
+          >
             {name}
           </a>
         </p>
       </aside>
       <nav>
         <div className="grid grid-flow-col gap-4">
-          <a href="https://x.com/Shaharear_" target="_blank">
+          <a className="hover:scale-105" href="https://x.com/Shaharear_" target="_blank">
             <PiXLogoBold size={30} />
           </a>
-          <a href="https://www.youtube.com/@oddshaharear3609" target="_blank">
+          <a className="hover:scale-105" href="https://www.youtube.com/@oddshaharear3609" target="_blank">
             <FaYoutube size={30}></FaYoutube>
           </a>
-          <a href="https://www.facebook.com/odd.otaku" target="_blank">
+          <a className="hover:scale-105" href="https://www.facebook.com/odd.otaku" target="_blank">
             <FaFacebook size={30}></FaFacebook>
           </a>
         </div>

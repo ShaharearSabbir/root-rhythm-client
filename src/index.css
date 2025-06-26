@@ -80,5 +80,5 @@ body {
 
 
 a.active {
-  @apply border-b-2 border-accent bg-base-100;
+  @apply border-b-2 border-accent bg-base-200;
 }

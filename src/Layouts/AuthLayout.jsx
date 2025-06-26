@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../Components/Header";
 import { Outlet, useNavigation } from "react-router";
 import Loader from "../Components/Loader";
+import Header from "../Components/Header/Header";
 
 const AuthLayout = () => {
   let navigation = useNavigation();

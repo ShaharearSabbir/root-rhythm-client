@@ -1,7 +1,7 @@
 import React from "react";
 import Banner from "../Components/Banner/Banner";
 import AllCategories from "../Components/AllCategories";
-import AboutUs from "../Components/AboutUs";
+import AboutUs from "./AboutUs";
 import WhyUs from "../Components/WhyUs";
 import Latest from "../Components/Latest";
 import FAQ from "../Components/FAQ";
@@ -16,13 +16,12 @@ const Home = () => {
       <Helmet>
         <title>Home | Root Rhythm</title>
       </Helmet>
-      <div className="rounded-3xl overflow-hidden">
+      <div className=" max-h-[60vh] min-h-[60vh] overflow-hidden">
         <Banner></Banner>
       </div>
       <AllCategories categories={categories}></AllCategories>
       <Latest latestPlants={latestPlants}></Latest>
       <BeginnerFriendly easyPlants={easyPlants}></BeginnerFriendly>
-      <AboutUs></AboutUs>
       <FAQ></FAQ>
       <WhyUs></WhyUs>
     </div>
