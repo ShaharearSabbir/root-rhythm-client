@@ -15,7 +15,7 @@ const PlantForTable = ({ plant, index }) => {
 
   return (
     <tr>
-      <th>
+      <th className="hidden md:block">
         <label>{index + 1}</label>
       </th>
       <td>

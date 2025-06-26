@@ -22,8 +22,7 @@ const Contact = () => {
     console.log("Form submitted:", formData);
     const messageBox = document.getElementById("messageBox");
     if (messageBox) {
-      messageBox.innerText =
-        "Message sent successfully!";
+      messageBox.innerText = "Message sent successfully!";
       messageBox.classList.remove("hidden");
       messageBox.classList.add(
         "bg-green-100",
@@ -38,7 +37,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="w-full rounded-lg overflow-hidden transition-colors duration-300">
+    <div className="w-full rounded-lg overflow-hidden motion-translate-y-in-100">
       <div
         id="messageBox"
         className="hidden p-4 mb-4 text-center border rounded-md"

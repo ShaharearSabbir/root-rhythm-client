@@ -1,7 +1,6 @@
 import React from "react";
 import Banner from "../Components/Banner/Banner";
 import AllCategories from "../Components/AllCategories";
-import AboutUs from "./AboutUs";
 import WhyUs from "../Components/WhyUs";
 import Latest from "../Components/Latest";
 import FAQ from "../Components/FAQ";

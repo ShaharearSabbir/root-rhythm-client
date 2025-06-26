@@ -10,7 +10,7 @@ const SideNavigation = () => {
   const { user } = useContext(AuthContext);
   console.log(user);
   return (
-    <nav className="p-10 mt-15 bg-primary min-h-screen md:fixed absolute z-10 w-full md:w-3/12 text-white">
+    <nav className="p-10 mt-15 bg-primary min-h-screen fixed z-10 w-full lg:w-3/12 text-white">
       <PageHeader className="flex items-center">
         <GrDashboard className="inline" /> Dashboard
       </PageHeader>

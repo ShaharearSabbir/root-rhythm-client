@@ -9,7 +9,7 @@ const HomeLayout = () => {
 
   return (
     <div className="min-h-screen relative">
-      <div className="top-0 sticky z-100 bg-base-100 shadow-md">
+      <div className="top-0 lg:sticky lg:z-100 bg-base-100 shadow-md">
         <Header></Header>
       </div>
       {navigation.state === "loading" ? (

@@ -4,7 +4,7 @@ import PageHeader from "../Components/Shared/PageHeader";
 
 const AboutUs = () => {
   return (
-    <div>
+    <div className="motion-translate-y-in-100">
       <div className="p-8 text-center rounded-t-lg">
         <PageHeader>About Root Rhythm</PageHeader>
         <p className="text-lg opacity-90">Read more about us</p>

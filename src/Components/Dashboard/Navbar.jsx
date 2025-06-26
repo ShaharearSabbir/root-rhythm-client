@@ -35,7 +35,10 @@ const Navbar = ({ setShowSide }) => {
     <div className="bg-base-100 shadow fixed w-full z-100 top-0">
       <div className="navbar lg:w-11/12 mx-auto flex justify-between">
         <div className="flex">
-          <button onClick={() => setShowSide((prev) => !prev)}>
+          <button
+            className="inline lg:hidden"
+            onClick={() => setShowSide((prev) => !prev)}
+          >
             <BiMenu size={35} />
           </button>
           <BrandLogo />

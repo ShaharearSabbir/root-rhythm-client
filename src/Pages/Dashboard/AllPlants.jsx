@@ -34,50 +34,49 @@ const AllPlants = () => {
         <PageHeader>All Plants</PageHeader>
         <p className="text-lg opacity-90">A list of plants</p>
       </div>
-      <div className="flex flex-col gap-5 md:flex-row justify-end md:items-center my-3">
-        <div className="flex gap-4">
-          <div className="flex items-center gap-3">
-            <p>Sort By</p>
-            <select
-              className="select w-fit"
-              onChange={(e) => setSortBy(e.target.value)}
+      <div className="flex flex-col justify-end items-end md:flex-row gap-4">
+        <div className="flex items-center gap-3">
+          <p>Sort By</p>
+          <select
+            className="select w-fit"
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option
+              selected={sortBy === "nextWatering" ? true : false}
+              value="nextWatering"
             >
-              <option
-                selected={sortBy === "nextWatering" ? true : false}
-                value="nextWatering"
-              >
-                Next Watering Date
-              </option>
-              <option
-                selected={sortBy === "careLevel" ? true : false}
-                value="careLevel"
-              >
-                Care Level
-              </option>
-            </select>
-          </div>
-          <div className="flex items-center gap-3">
-            <p>Order</p>
-            <select
-              className="select w-fit"
-              onChange={(e) => setOrder(e.target.value)}
+              Next Watering Date
+            </option>
+            <option
+              selected={sortBy === "careLevel" ? true : false}
+              value="careLevel"
             >
-              <option
-                selected={order === "ascending" ? true : false}
-                value="ascending"
-              >
-                Ascending
-              </option>
-              <option
-                selected={order === "descending" ? true : false}
-                value="descending"
-              >
-                Descending{" "}
-              </option>
-            </select>
-          </div>
+              Care Level
+            </option>
+          </select>
+        </div>
+        <div className="flex items-center gap-3">
+          <p>Order</p>
+          <select
+            className="select w-fit"
+            onChange={(e) => setOrder(e.target.value)}
+          >
+            <option
+              selected={order === "ascending" ? true : false}
+              value="ascending"
+            >
+              Ascending
+            </option>
+            <option
+              selected={order === "descending" ? true : false}
+              value="descending"
+            >
+              Descending{" "}
+            </option>
+          </select>
         </div>
       </div>
+
       <table className="table">
         {/* head */}
         <thead>

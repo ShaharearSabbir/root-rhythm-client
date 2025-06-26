@@ -34,7 +34,7 @@ const PlantCard = ({ plant, setPlants, plants }) => {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="w-full p-10 space-y-2">
+      <div className="w-full p-5 space-y-2">
         <h2 className="text-xl font-bold">{plant.plantName}</h2>
         <p>
           <strong>Category: </strong> {plant.category}
@@ -43,7 +43,7 @@ const PlantCard = ({ plant, setPlants, plants }) => {
           <strong>Care Level: </strong> {plant.careLevel}
         </p>
         <div className="w-full flex justify-end mt-8 items-end">
-          <div className="flex flex-col gap-3 justify-end">
+          <div className="flex flex-col gap-3 justify-center md:justify-end">
             {user?.email === plant.userEmail &&
               location.pathname === "/dashboard/myPlants" && (
                 <div className="flex flex-col gap-3 justify-end">

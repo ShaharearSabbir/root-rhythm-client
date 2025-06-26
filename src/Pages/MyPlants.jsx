@@ -29,7 +29,7 @@ const MyPlants = () => {
       <Helmet>
         <title>My Plants | Root Rhythm</title>
       </Helmet>
-      <div className="p-8 text-center">
+      <div className="md:p-8 text-center">
         <PageHeader>My Plants</PageHeader>
         <p className="text-lg opacity-90">List of my plants</p>
       </div>
