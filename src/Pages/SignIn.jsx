@@ -70,7 +70,7 @@ const SignIn = () => {
         <title>Sign In | Root Rhythm</title>
       </Helmet>
       <div className="card w-full max-w-md motion-translate-y-in-100">
-        <div className="card-body">
+        <div className="card-body px-0">
           <h1 className="text-3xl font-bold text-center">Sign In Now!</h1>
           <form onSubmit={handleSignIn} className="fieldset">
             <label className="label">Email</label>

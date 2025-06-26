@@ -169,7 +169,7 @@ const SignUp = () => {
         <title>Sign Up | Root Rhythm</title>
       </Helmet>
       <div className="card w-full max-w-md  motion-translate-y-in-100">
-        <div className="card-body">
+        <div className="card-body px-0">
           <h1 className="text-3xl font-bold text-center">Sign Up Now!</h1>
           <form onSubmit={handleSignUp} className="fieldset">
             <label className="label">Name</label>

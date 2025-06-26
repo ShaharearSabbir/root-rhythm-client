@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Components/Context/AuthContext";
+
 import Swal from "sweetalert2";
 import { useLoaderData } from "react-router";
 import { CiCirclePlus } from "react-icons/ci";
 import { Helmet } from "react-helmet";
+
+import { AuthContext } from "../../Components/Context/AuthContext";
 import PageHeader from "../../Components/Shared/PageHeader";
 
 const AddPlant = () => {
@@ -170,7 +172,7 @@ const AddPlant = () => {
         <title>Add Plant | Root Rhythm</title>
       </Helmet>
       <div className="card bg-base-100 w-full">
-        <div className="card-body">
+        <div className="card-body px-0">
           <div className="p-8 text-center">
             <PageHeader>Add Plant</PageHeader>
             <p className="text-lg opacity-90">Add your new plant</p>
