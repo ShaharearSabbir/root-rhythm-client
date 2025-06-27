@@ -39,17 +39,13 @@ const AllPlantsMain = () => {
     fetch(`${import.meta.env.VITE_BASE_SITE}/categories`)
       .then((res) => res.json())
       .then((result) => setCategories(result));
-  }, []);
+  }, [loader]);
 
   console.log(categories);
 
   const handlePageButton = (page) => {
     setPage(page);
   };
-
-  if (loader) {
-    return <Loader />;
-  }
 
   return (
     <div>
@@ -68,14 +64,11 @@ const AllPlantsMain = () => {
               <option value="" selected={filterBy === "" ? true : false}>
                 All
               </option>
-              {categories &&
-                categories.map((cat) => (
-                  <option
-                    selected={filterBy === cat.categoryName ? true : false}
-                  >
-                    {cat.categoryName}
-                  </option>
-                ))}
+              {categories.map((cat) => (
+                <option selected={filterBy === cat.categoryName ? true : false}>
+                  {cat.categoryName}
+                </option>
+              ))}
             </select>
           </div>
           <div className="space-y-2">
@@ -119,61 +112,67 @@ const AllPlantsMain = () => {
             </select>
           </div>
         </div>
-        <div className="lg:col-span-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-10">
-            {plants.map((plant) => (
-              <PlantCard plant={plant} />
-            ))}
+        {loader ? (
+          <div className="lg:col-span-10 text-center">
+            <Loader />
           </div>
-          <div className="flex justify-center items-center gap-3 flex-wrap mt-10 motion-translate-y-in-100">
-            <button
-              onClick={() => {
-                if (page + 1 > 1) {
-                  setPage((prev) => prev - 1);
-                }
-              }}
-              className="btn btn-accent"
-            >
-              <GiPreviousButton size={20} /> Previous
-            </button>
-            {pageButtons.map((button) => (
+        ) : (
+          <div className="lg:col-span-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-10">
+              {plants.map((plant) => (
+                <PlantCard plant={plant} />
+              ))}
+            </div>
+            <div className="flex justify-center items-center gap-3 flex-wrap mt-10 motion-translate-y-in-100">
               <button
-                onClick={() => handlePageButton(button)}
-                className={`btn ${
-                  page === button ? "btn-primary" : "btn-accent"
-                }`}
+                onClick={() => {
+                  if (page + 1 > 1) {
+                    setPage((prev) => prev - 1);
+                  }
+                }}
+                className="btn btn-accent"
               >
-                {button + 1}
+                <GiPreviousButton size={20} /> Previous
               </button>
-            ))}
-            <button
-              onClick={() => {
-                if (page + 1 < totalPage) {
-                  setPage((prev) => prev + 1);
-                }
-              }}
-              className="btn btn-accent"
-            >
-              Next <GiNextButton size={20} />
-            </button>
+              {pageButtons.map((button) => (
+                <button
+                  onClick={() => handlePageButton(button)}
+                  className={`btn ${
+                    page === button ? "btn-primary" : "btn-accent"
+                  }`}
+                >
+                  {button + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => {
+                  if (page + 1 < totalPage) {
+                    setPage((prev) => prev + 1);
+                  }
+                }}
+                className="btn btn-accent"
+              >
+                Next <GiNextButton size={20} />
+              </button>
+            </div>
+            <div className=" flex justify-center flex-wrap items-center gap-2 mt-5">
+              <p>Plants Per Page:</p>
+              <select
+                className="select select-sm select-accent w-fit"
+                value={plantsPerPage}
+                onChange={(e) => {
+                  setPlantsPerPage(parseInt(e.target.value));
+                  setPage(0);
+                }}
+              >
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+              </select>
+            </div>
           </div>
-          <div className=" flex justify-center flex-wrap items-center gap-2 mt-5">
-            <p>Plants Per Page:</p>
-            <select
-              className="select select-sm select-accent w-fit"
-              value={plantsPerPage}
-              onChange={(e) => {
-                setPlantsPerPage(parseInt(e.target.value));
-                setPage(0);
-              }}
-            >
-              <option>5</option>
-              <option>10</option>
-              <option>20</option>
-              <option>50</option>
-            </select>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
