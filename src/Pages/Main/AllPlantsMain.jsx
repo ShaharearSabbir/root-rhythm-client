@@ -33,7 +33,6 @@ const AllPlantsMain = () => {
         setPlants(data);
         setLoader(false);
       });
-    setPage(0);
   }, [filterBy, order, page, plantsPerPage, sortBy]);
 
   useEffect(() => {
