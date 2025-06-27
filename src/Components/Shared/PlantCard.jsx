@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { Link, useLocation } from "react-router";
 import Swal from "sweetalert2";
-import { AuthContext } from "./Context/AuthContext";
-import { Toast } from "../util/utils";
+import { AuthContext } from "../Context/AuthContext";
+import { Toast } from "../../util/utils";
 
 const PlantCard = ({ plant, setPlants, plants }) => {
   const location = useLocation();
   const { user } = useContext(AuthContext);
 
   const handleDelete = (id) => {
-    fetch(`https://root-rhythms-server.vercel.app/plant/${id}`, {
+    fetch(`${import.meta.env.VITE_BASE_SITE}/plant/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -26,7 +26,7 @@ const PlantCard = ({ plant, setPlants, plants }) => {
   };
 
   return (
-    <div className="lg:card lg:card-side bg-base-100 rounded-2xl overflow-hidden hover:shadow border-2 border-base-200 motion-translate-y-in-100">
+    <div className="lg:card lg:card-side bg-base-100 rounded-2xl overflow-hidden border-2 border-base-300 hover:border-primary motion-translate-y-in-100">
       <div className="aspect-square lg:max-w-[300px] lg:min-w-[300px]">
         <img
           src={plant.photoURL}

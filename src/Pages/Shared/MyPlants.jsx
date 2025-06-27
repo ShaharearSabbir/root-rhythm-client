@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Components/Context/AuthContext";
-import PlantCard from "../Components/PlantCard";
+import { AuthContext } from "../../Components/Context/AuthContext";
+import PlantCard from "../../Components/Shared/PlantCard";
 import { Link } from "react-router";
 import { FaCirclePlus } from "react-icons/fa6";
-import Loader from "../Components/Loader";
+import Loader from "../../Components/Shared/Loader";
 import { Helmet } from "react-helmet";
-import PageHeader from "../Components/Shared/PageHeader";
+import PageHeader from "../../Components/Shared/PageHeader";
 
 const MyPlants = () => {
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ const MyPlants = () => {
   const [plants, setPlants] = useState([]);
   useEffect(() => {
     setLoading(true);
-    fetch(`https://root-rhythms-server.vercel.app/plants/${user.uid}`)
+    fetch(`${import.meta.env.VITE_BASE_SITE}/plants/${user.uid}`)
       .then((res) => res.json())
       .then((data) => {
         setPlants(data);

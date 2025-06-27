@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Components/Context/AuthContext";
+import { AuthContext } from "../../Components/Context/AuthContext";
 import { useLoaderData, useNavigate } from "react-router";
 import { Helmet } from "react-helmet";
-import { Toast } from "../util/utils";
+import { Toast } from "../../util/utils";
 
 const UpdatePlant = () => {
   const plant = useLoaderData();
@@ -76,7 +76,7 @@ const UpdatePlant = () => {
 
     plantData.uid = user.uid;
 
-    fetch(`https://root-rhythms-server.vercel.app/plant/${plant._id}`, {
+    fetch(`${import.meta.env.VITE_BASE_SITE}/plant/${plant._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -140,7 +140,7 @@ const UpdatePlant = () => {
   ]);
 
   useEffect(() => {
-    fetch("https://root-rhythms-server.vercel.app/categories")
+    fetch(`${import.meta.env.VITE_BASE_SITE}/categories`)
       .then((res) => res.json())
       .then((result) => setCategories(result));
   }, []);

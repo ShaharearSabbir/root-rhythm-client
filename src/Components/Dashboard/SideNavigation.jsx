@@ -5,7 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { PiPlant } from "react-icons/pi";
 import { GiPlantSeed, GiPlantWatering } from "react-icons/gi";
 import PageHeader from "../Shared/PageHeader";
-import { GrDashboard } from "react-icons/gr";
+import { GrDashboard, GrOverview } from "react-icons/gr";
 const SideNavigation = () => {
   const { user } = useContext(AuthContext);
   console.log(user);
@@ -18,9 +18,9 @@ const SideNavigation = () => {
         <li>
           <NavLink
             className="text-lg font-semibold btn btn-ghost w-full justify-start "
-            to="/dashboard/profile"
+            to="/dashboard/overview"
           >
-            <CgProfile /> Profile
+            <GrOverview /> Overview
           </NavLink>
         </li>
         <li>

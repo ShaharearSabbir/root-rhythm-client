@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useLoaderData, useParams } from "react-router";
-import PlantCard from "../Components/PlantCard";
+
 import { Helmet } from "react-helmet";
-import PageHeader from "../Components/Shared/PageHeader";
+import PlantCard from "../../Components/Shared/PlantCard";
+import PageHeader from "../../Components/Shared/PageHeader";
 
 const PlantByCategory = () => {
   const { category } = useParams();

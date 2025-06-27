@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Components/Context/AuthContext";
+import { AuthContext } from "../../Components/Context/AuthContext";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
@@ -111,7 +111,7 @@ const SignUp = () => {
         userProfile.email = email;
         userProfile.uid = userCredential.user.uid;
 
-        return fetch("https://root-rhythms-server.vercel.app/users", {
+        fetch(`${import.meta.env.VITE_BASE_SITE}/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

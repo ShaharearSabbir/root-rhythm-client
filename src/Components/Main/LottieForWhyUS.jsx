@@ -1,14 +1,13 @@
 import React from "react";
 import { useLottie, useLottieInteractivity } from "lottie-react";
-import lottieJson from "../assets/About Us.json";
-
+import lottieJson from "../../assets/Why Us.json";
 
 const options = {
   animationData: lottieJson,
   autoplay: true,
 };
 
-const LottieForAboutUs = () => {
+const LottieForWhyUS = () => {
   const lottieObj = useLottie(options);
   const Animation = useLottieInteractivity({
     lottieObj,
@@ -17,7 +16,7 @@ const LottieForAboutUs = () => {
       {
         visibility: [0, 0.9],
         type: "seek",
-        frames: [0, 120],
+        frames: [0, 181],
       },
     ],
   });
@@ -25,4 +24,4 @@ const LottieForAboutUs = () => {
   return Animation;
 };
 
-export default LottieForAboutUs;
+export default LottieForWhyUS;

@@ -6,7 +6,7 @@ import ThemeToggle from "../Shared/ThemeToggle";
 import { Link } from "react-router";
 
 const HeaderPopup = () => {
-  const { user, signOutUser, setUser } = useContext(AuthContext);
+  const { signOutUser, setUser } = useContext(AuthContext);
   const handleSignOut = () => {
     signOutUser().then(() => {
       setUser(null);
@@ -18,7 +18,7 @@ const HeaderPopup = () => {
   };
   return (
     <div className="bg-primary text-white p-5 w-40 rounded space-y-3">
-      <Link className="inline-block hover:font-bold" to="/dashboard/profile">
+      <Link className="inline-block hover:font-bold" to="/dashboard/overview">
         Dashboard
       </Link>
       <div className="flex items-center gap-2">

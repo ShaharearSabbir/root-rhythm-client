@@ -46,6 +46,9 @@ const Header = () => {
         <NavLink to={`/aboutus`}>About Us</NavLink>
       </li>
       <li className="text-lg font-semibold">
+        <NavLink to={`/whyus`}>Why Us</NavLink>
+      </li>
+      <li className="text-lg font-semibold">
         <NavLink to={`/contact`}>Contact</NavLink>
       </li>
     </>
@@ -88,7 +91,7 @@ const Header = () => {
         <div>
           {user ? (
             <div className="flex gap-3 relative">
-              <NavImage photoURL={user.photoURL} setShowPopup={setShowPopup} />
+              <NavImage setShowPopup={setShowPopup} />
               {showPopup && (
                 <div
                   className="absolute w-30 top-14 right-10 z-10"

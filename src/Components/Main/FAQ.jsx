@@ -6,7 +6,7 @@ const FAQ = () => {
       <div className="mb-3 lg:my-10">
         <h3 className="text-2xl font-bold">FAQ</h3>
       </div>
-      <div className="collapse collapse-plus bg-base-100 border border-base-300">
+      <div className="collapse collapse-plus bg-base-100 border-2 border-base-300 mt-2 hover:border-primary">
         <input type="radio" name="my-accordion-3" defaultChecked />
         <div className="collapse-title font-semibold">
           How often should I water my plants?
@@ -17,7 +17,7 @@ const FAQ = () => {
           again!
         </div>
       </div>
-      <div className="collapse collapse-plus bg-base-100 border border-base-300">
+      <div className="collapse collapse-plus bg-base-100 border-2 border-base-300 mt-2 hover:border-primary">
         <input type="radio" name="my-accordion-3" />
         <div className="collapse-title font-semibold">
           What's the best way to fertilize my plants?
@@ -28,7 +28,7 @@ const FAQ = () => {
           time.
         </div>
       </div>
-      <div className="collapse collapse-plus bg-base-100 border border-base-300">
+      <div className="collapse collapse-plus bg-base-100 border-2 border-base-300 mt-2 hover:border-primary">
         <input type="radio" name="my-accordion-3" />
         <div className="collapse-title font-semibold">
           How can I tell if my plant is sick or stressed?
@@ -38,7 +38,7 @@ const FAQ = () => {
           making it easier to spot subtle changes and address issues promptly.
         </div>
       </div>
-      <div className="collapse collapse-plus bg-base-100 border border-base-300">
+      <div className="collapse collapse-plus bg-base-100 border-2 border-base-300 mt-2 hover:border-primary">
         <input type="radio" name="my-accordion-3" />
         <div className="collapse-title font-semibold">
           I have so many plants; how do I keep track of them all?
@@ -48,7 +48,7 @@ const FAQ = () => {
           records, care tasks, and reminders for effortless management.
         </div>
       </div>
-      <div className="collapse collapse-plus bg-base-100 border border-base-300">
+      <div className="collapse collapse-plus bg-base-100 border-2 border-base-300 mt-2 hover:border-primary">
         <input type="radio" name="my-accordion-3" />
         <div className="collapse-title font-semibold">
           My plant isn't thriving, but I don't know why.
@@ -59,7 +59,7 @@ const FAQ = () => {
           health.
         </div>
       </div>
-      <div className="collapse collapse-plus bg-base-100 border border-base-300">
+      <div className="collapse collapse-plus bg-base-100 border-2 border-base-300 mt-2 hover:border-primary">
         <input type="radio" name="my-accordion-3" />
         <div className="collapse-title font-semibold">
           Can Root Rhythm remind me of important care tasks?

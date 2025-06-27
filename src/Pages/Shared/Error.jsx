@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Header from "../Components/Header/Header";
+import Header from "../../Components/Header/Header";
 
 const Error = () => {
   return (

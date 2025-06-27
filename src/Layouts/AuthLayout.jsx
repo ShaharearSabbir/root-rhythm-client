@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, useNavigation } from "react-router";
-import Loader from "../Components/Loader";
+import Loader from "../Components/Shared/Loader";
 import Header from "../Components/Header/Header";
 
 const AuthLayout = () => {

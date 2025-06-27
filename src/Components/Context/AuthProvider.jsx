@@ -13,6 +13,7 @@ import {
 import { app } from "../../firebase/firebase-config";
 import { AuthContext } from "./AuthContext";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
+import loading from "daisyui/components/loading";
 
 const AuthProvider = ({ children }) => {
   const [loader, setLoader] = useState(true);
@@ -38,18 +39,13 @@ const AuthProvider = ({ children }) => {
   };
 
   const handleGoogleOneTapSuccess = async (credentialResponse) => {
-    console.log("Google One Tap Success:", credentialResponse);
     const idToken = credentialResponse.credential;
 
     const credential = GoogleAuthProvider.credential(idToken);
     try {
       await signInWithCredential(auth, credential);
-      console.log("Signed in with Firebase using Google One Tap ID Token!");
     } catch (error) {
-      console.error(
-        "Firebase sign-in with Google One Tap credential failed:",
-        error.message
-      );
+      console.error(error.message);
     }
   };
 
@@ -60,6 +56,7 @@ const AuthProvider = ({ children }) => {
   useGoogleOneTapLogin({
     onSuccess: handleGoogleOneTapSuccess,
     onError: handleGoogleOneTapError,
+    disabled: loader || !!user,
   });
 
   useEffect(() => {
@@ -73,7 +70,7 @@ const AuthProvider = ({ children }) => {
       try {
         if (currentUser.providerData[0]?.providerId === "password") {
           const res = await fetch(
-            `https://root-rhythms-server.vercel.app/user/${currentUser.uid}`
+            `${import.meta.env.VITE_BASE_SITE}/user/${currentUser.uid}`
           );
           const data = await res.json();
           const userData = { ...currentUser, ...data };

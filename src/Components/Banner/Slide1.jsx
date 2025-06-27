@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
 const Slide1 = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div
       className="hero min-h-[60vh]"
@@ -17,9 +19,15 @@ const Slide1 = () => {
             Welcome to Root Rhythm! Cultivate thriving plants and peace of mind
             with your personal plant care assistant
           </p>
-          <Link to={"/auth/signin"} className="btn btn-primary">
-            Login
-          </Link>
+          {user ? (
+            <Link to={"/dashboard/overview"} className="btn btn-primary">
+              Dashboard
+            </Link>
+          ) : (
+            <Link to={"/auth/signin"} className="btn btn-primary">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

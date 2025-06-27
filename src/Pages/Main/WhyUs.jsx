@@ -1,10 +1,17 @@
 import React from "react";
-import LottieForWhyUS from "./LottieForWhyUS";
+import LottieForWhyUS from "../../Components/Main/LottieForWhyUS";
+import PageHeader from "../../Components/Shared/PageHeader";
 
 const WhyUs = () => {
   return (
-    <div className="my-10 md:my-20 lg:my-32">
-      <h3 className="text-2xl font-bold mb-3">Why Choose Root Rhythm?</h3>
+    <div>
+      <div className="p-8 text-center rounded-t-lg">
+        <PageHeader>Why Choose Root Rhythm?</PageHeader>
+        <p className="text-lg opacity-90">
+          Know why Root Rhythm is is the best!!
+        </p>
+      </div>
+
       <p className="text-justify">
         At Root Rhythm, we're more than just an app; we're your partner in
         cultivating a thriving plant haven. We understand the unique joys and

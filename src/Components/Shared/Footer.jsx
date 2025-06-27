@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { FaFacebook, FaYoutube } from "react-icons/fa6";
 import { PiXLogoBold } from "react-icons/pi";
-import { AuthContext } from "./Context/AuthContext";
+import { AuthContext } from "../Context/AuthContext";
 
 const Footer = () => {
   const { name } = useContext(AuthContext);
@@ -16,8 +16,8 @@ const Footer = () => {
         <p className="font-bold text-2xl">
           Root Rhythm
           <br />
-          <span className="text-sm font-semibold">Helping you since 2023</span>
         </p>
+        <span className="text-sm font-semibold">Helping you since 2023</span>
         <p>
           Copyright © {new Date().getFullYear()} - All right reserved By{" "}
           <a
@@ -31,13 +31,25 @@ const Footer = () => {
       </aside>
       <nav>
         <div className="grid grid-flow-col gap-4">
-          <a className="hover:scale-105" href="https://x.com/Shaharear_" target="_blank">
+          <a
+            className="hover:scale-105"
+            href="https://x.com/Shaharear_"
+            target="_blank"
+          >
             <PiXLogoBold size={30} />
           </a>
-          <a className="hover:scale-105" href="https://www.youtube.com/@oddshaharear3609" target="_blank">
+          <a
+            className="hover:scale-105"
+            href="https://www.youtube.com/@oddshaharear3609"
+            target="_blank"
+          >
             <FaYoutube size={30}></FaYoutube>
           </a>
-          <a className="hover:scale-105" href="https://www.facebook.com/odd.otaku" target="_blank">
+          <a
+            className="hover:scale-105"
+            href="https://www.facebook.com/odd.otaku"
+            target="_blank"
+          >
             <FaFacebook size={30}></FaFacebook>
           </a>
         </div>

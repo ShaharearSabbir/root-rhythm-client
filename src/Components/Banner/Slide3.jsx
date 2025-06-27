@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
 const Slide3 = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="hero min-h-[60vh]">
       <div className="hero-content flex-col lg:flex-row">
@@ -13,9 +15,15 @@ const Slide3 = () => {
           <h1 className="text-xl md:text-3xl lg:text-5xl font-bold mb-5">
             Ditch the plant care stress
           </h1>
-          <Link to="/auth/signup" className="btn btn-primary">
-            Get Started
-          </Link>
+          {user ? (
+            <Link to={"/dashboard/overview"} className="btn btn-primary">
+              Dashboard
+            </Link>
+          ) : (
+            <Link to="/auth/signup" className="btn btn-primary">
+              Get Started
+            </Link>
+          )}
         </div>
       </div>
     </div>

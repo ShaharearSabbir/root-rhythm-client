@@ -48,7 +48,7 @@ const Navbar = ({ setShowSide }) => {
             <FaHome /> <span className="hidden md:inline">Home</span>
           </Link>
           <div className="flex gap-3 relative">
-            <NavImage photoURL={user.photoURL} setShowPopup={setShowPopup} />
+            <NavImage setShowPopup={setShowPopup} />
             {showPopup && (
               <div
                 className="absolute w-30 top-14 right-10 z-10"

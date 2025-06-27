@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { useLoaderData } from "react-router";
-import { AuthContext } from "../Components/Context/AuthContext";
+import { AuthContext } from "../../Components/Context/AuthContext";
 import { FaSunPlantWilt } from "react-icons/fa6";
 import { GiPlantWatering } from "react-icons/gi";
 import { IoWaterOutline } from "react-icons/io5";
 import { RiWaterFlashFill } from "react-icons/ri";
 import { Helmet } from "react-helmet";
-import PageHeader from "../Components/Shared/PageHeader";
+import PageHeader from "../../Components/Shared/PageHeader";
 
 const PlantDetails = () => {
   const { user } = useContext(AuthContext);
@@ -100,7 +100,8 @@ const PlantDetails = () => {
           <h3 className="text-xl font-bold text-primary">Owner Info</h3>
           <div>
             <h5 className="font-semibold">{userName}</h5>
-          </div>*
+          </div>
+          *
         </div>
       )}
     </div>

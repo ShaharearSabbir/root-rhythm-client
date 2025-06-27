@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PageHeader from "../Components/Shared/PageHeader";
+import PageHeader from "../../Components/Shared/PageHeader";
 
 const Contact = () => {
   const [formData, setFormData] = useState({

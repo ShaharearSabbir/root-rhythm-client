@@ -1,6 +1,6 @@
 import React from "react";
-import LottieForAboutUs from "../Components/LottieForAboutUs";
-import PageHeader from "../Components/Shared/PageHeader";
+import PageHeader from "../../Components/Shared/PageHeader";
+import LottieForAboutUs from "../../Components/Main/LottieForAboutUs";
 
 const AboutUs = () => {
   return (

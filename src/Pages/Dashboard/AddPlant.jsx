@@ -7,10 +7,12 @@ import { Helmet } from "react-helmet";
 
 import { AuthContext } from "../../Components/Context/AuthContext";
 import PageHeader from "../../Components/Shared/PageHeader";
+import { Toast } from "../../util/utils";
 
 const AddPlant = () => {
   const data = useLoaderData();
-  const [categories, setCategories] = useState(data.categories);
+  console.log(data);
+  const [categories, setCategories] = useState(data);
   const { user } = useContext(AuthContext);
   const [photoURL, setPhotoURL] = useState(null);
   const [loader, setLoader] = useState(false);
@@ -22,18 +24,6 @@ const AddPlant = () => {
   const [wateringFrequencyDays, setWateringFrequencyDays] = useState("");
   const [wateringFrequencyWeeks, setWateringFrequencyWeeks] = useState("");
   const [nextWatering, setNextWatering] = useState("");
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
-  });
 
   useEffect(() => {
     if (
@@ -117,7 +107,7 @@ const AddPlant = () => {
 
   const handleAddCategory = () => {
     const category = { categoryName, categoryPhotoURL };
-    fetch("https://root-rhythms-server.vercel.app/category", {
+    fetch(`${import.meta.env.VITE_BASE_SITE}/category`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -147,7 +137,7 @@ const AddPlant = () => {
     plantData.photoURL = photoURL;
     plantData.uid = user.uid;
 
-    fetch("https://root-rhythms-server.vercel.app/plant", {
+    fetch(`${import.meta.env.VITE_BASE_SITE}/plant`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -1,6 +1,7 @@
 import React from "react";
 import Category from "./Category";
 
+
 const AllCategories = ({ categories }) => {
   return (
     <div>
