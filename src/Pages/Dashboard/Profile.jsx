@@ -27,13 +27,11 @@ const Profile = () => {
           </div>
         </div>
         {/* Name */}
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <h2 className="text-3xl font-bold mb-2">
           {user.displayName || "User Name"}
         </h2>
         {/* Email */}
-        <p className="text-gray-600 dark:text-gray-300 text-lg mb-6">
-          {user.email || "user@example.com"}
-        </p>
+        <p className="text-lg mb-6">{user.email || "user@example.com"}</p>
       </div>
     </div>
   );
