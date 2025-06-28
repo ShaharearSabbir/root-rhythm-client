@@ -16,7 +16,8 @@ const AllPlants = () => {
   for (let i = 0; i < totalPage; i++) {
     pageButtons.push(i);
   }
-  console.log(totalPage, page);
+
+
 
   useEffect(() => {
     fetch(

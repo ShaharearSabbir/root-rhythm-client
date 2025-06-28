@@ -6,7 +6,8 @@ import PageHeader from "../../Components/Shared/PageHeader";
 import Loader from "../../Components/Shared/Loader";
 
 const AllPlantsMain = () => {
-  const { count } = useLoaderData();
+  // const { count } = useLoaderData();
+  const [count, setCount] = useState(0);
   const [plants, setPlants] = useState([]);
   const [categories, setCategories] = useState([]);
   const [sortBy, setSortBy] = useState("nextWatering");
@@ -20,6 +21,17 @@ const AllPlantsMain = () => {
   for (let i = 0; i < totalPage; i++) {
     pageButtons.push(i);
   }
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_BASE_SITE}/plantCount?filterBy=${filterBy}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCount(data.count);
+        setPage(0);
+      });
+  }, [filterBy]);
+
+  console.log(count);
 
   useEffect(() => {
     setLoader(true);
@@ -54,11 +66,11 @@ const AllPlantsMain = () => {
         <p className="text-lg opacity-90">See All the Plants</p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-12">
-        <div className="lg:col-span-2 space-y-4 mb-5">
+        <div className="lg:col-span-2 space-y-4 mb-5 mr-8">
           <div className="space-y-2">
             <p>Filter By:</p>
             <select
-              className="select w-fit border border-base-300"
+              className="select border border-base-300 w-full"
               onChange={(e) => setFilterBy(e.target.value)}
             >
               <option value="" selected={filterBy === "" ? true : false}>
@@ -74,7 +86,7 @@ const AllPlantsMain = () => {
           <div className="space-y-2">
             <p>Sort By:</p>
             <select
-              className="select w-fit border border-base-300"
+              className="select border border-base-300 w-full"
               onChange={(e) => setSortBy(e.target.value)}
             >
               <option
@@ -94,7 +106,7 @@ const AllPlantsMain = () => {
           <div className="space-y-2">
             <p>Order By:</p>
             <select
-              className="select w-fit border border-base-300"
+              className="select border border-base-300 w-full"
               onChange={(e) => setOrder(e.target.value)}
             >
               <option
